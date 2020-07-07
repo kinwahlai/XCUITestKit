@@ -1,12 +1,11 @@
+platform :ios, '13.0'
 use_frameworks!
 
 target 'XCUITestKit_Example' do
   pod 'XCUITestKit', :path => '../'
 
-  target 'XCUITestKit_Tests' do
-    inherit! :search_paths
+  target 'XCUITestKit_UITests' do
+    inherit! :none
 
-    pod 'Quick', '~> 1.2.0'
-    pod 'Nimble', '~> 7.0'
   end
 end
