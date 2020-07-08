@@ -12,13 +12,13 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		66CD87F724B492D900FDA672 /* XCUITestKit_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CD87F624B492D900FDA672 /* XCUITestKit_UITests.swift */; };
 		66CD880424B4BF6200FDA672 /* MonthCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CD87FF24B4BF6200FDA672 /* MonthCollectionCell.swift */; };
 		66CD880524B4BF6200FDA672 /* ScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CD880024B4BF6200FDA672 /* ScrollableViewController.swift */; };
 		66CD880624B4BF6200FDA672 /* CollectionViewDataSourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CD880124B4BF6200FDA672 /* CollectionViewDataSourceDelegate.swift */; };
 		66CD880724B4BF6200FDA672 /* ThirtyDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CD880224B4BF6200FDA672 /* ThirtyDayCell.swift */; };
 		66CD880824B4BF6200FDA672 /* TableViewDataSourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CD880324B4BF6200FDA672 /* TableViewDataSourceDelegate.swift */; };
 		66CD880A24B4D27800FDA672 /* AppEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CD880924B4D27800FDA672 /* AppEntryViewController.swift */; };
+		66CD8D5424B62C4B00FDA672 /* VerifyEmailUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CD8D5324B62C4B00FDA672 /* VerifyEmailUITests.swift */; };
 		CAC6339A3D602D8B8772773C /* Pods_XCUITestKit_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E49DBABD93482EB39825BE2 /* Pods_XCUITestKit_UITests.framework */; };
 		D849CAC702CCFE5FADEE67E5 /* Pods_XCUITestKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8334F73895567097877EA95D /* Pods_XCUITestKit_Example.framework */; };
 /* End PBXBuildFile section */
@@ -46,7 +46,6 @@
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		66CD87F424B492D900FDA672 /* XCUITestKit_UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCUITestKit_UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		66CD87F624B492D900FDA672 /* XCUITestKit_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUITestKit_UITests.swift; sourceTree = "<group>"; };
 		66CD87F824B492D900FDA672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66CD87FF24B4BF6200FDA672 /* MonthCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthCollectionCell.swift; sourceTree = "<group>"; };
 		66CD880024B4BF6200FDA672 /* ScrollableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +53,7 @@
 		66CD880224B4BF6200FDA672 /* ThirtyDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirtyDayCell.swift; sourceTree = "<group>"; };
 		66CD880324B4BF6200FDA672 /* TableViewDataSourceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceDelegate.swift; sourceTree = "<group>"; };
 		66CD880924B4D27800FDA672 /* AppEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryViewController.swift; sourceTree = "<group>"; };
+		66CD8D5324B62C4B00FDA672 /* VerifyEmailUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailUITests.swift; sourceTree = "<group>"; };
 		6E49DBABD93482EB39825BE2 /* Pods_XCUITestKit_UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XCUITestKit_UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8334F73895567097877EA95D /* Pods_XCUITestKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XCUITestKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99D654D94111D29458F989EB /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -148,8 +148,8 @@
 		66CD87F524B492D900FDA672 /* XCUITestKit_UITests */ = {
 			isa = PBXGroup;
 			children = (
-				66CD87F624B492D900FDA672 /* XCUITestKit_UITests.swift */,
 				66CD87F824B492D900FDA672 /* Info.plist */,
+				66CD8D5324B62C4B00FDA672 /* VerifyEmailUITests.swift */,
 			);
 			path = XCUITestKit_UITests;
 			sourceTree = "<group>";
@@ -364,7 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66CD87F724B492D900FDA672 /* XCUITestKit_UITests.swift in Sources */,
+				66CD8D5424B62C4B00FDA672 /* VerifyEmailUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
