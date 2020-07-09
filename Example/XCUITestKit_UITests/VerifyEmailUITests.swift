@@ -13,6 +13,7 @@ class VerifyEmailUITests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
         XCUIApplication().launch()
+        print("SIMULATOR_UDID >>>>>>>>>>>> \(String(describing: ProcessInfo.processInfo.environment["SIMULATOR_UDID"]))")
     }
 
     override func tearDownWithError() throws {
@@ -26,7 +27,7 @@ class VerifyEmailUITests: XCTestCase {
     func testEmailYouEnteredIsValid() throws {
         let app = XCUIApplication()
         XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
-        app.tables.staticTexts["Test UI Controls"].tap()
+        app.tables.staticTexts["btn_testUIControls"].tap()
         XCTAssertEqual(app.staticTexts["headline_label"].title, "")
         
         app.textFields["email_textfield"].tap()
@@ -40,7 +41,7 @@ class VerifyEmailUITests: XCTestCase {
     func testErrorMessageShownOnInvalidEmail() throws {
         let app = XCUIApplication()
         XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
-        app.tables.staticTexts["Test UI Controls"].tap()
+        app.tables.staticTexts["btn_testUIControls"].tap()
         XCTAssertEqual(app.staticTexts["headline_label"].title, "")
         
         app.textFields["email_textfield"].tap()
@@ -55,7 +56,7 @@ class VerifyEmailUITests: XCTestCase {
     func testErrorMessageHiddenOnReplacedWithValidEmail() throws {
         let app = XCUIApplication()
         XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
-        app.tables.staticTexts["Test UI Controls"].tap()
+        app.tables.staticTexts["btn_testUIControls"].tap()
         XCTAssertEqual(app.staticTexts["headline_label"].title, "")
         
         app.textFields["email_textfield"].tap()
