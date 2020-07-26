@@ -1,16 +1,22 @@
 PODS:
-  - XCUITestKit (0.1.0)
+  - XCUITestKit (0.1.1)
+  - XCUITestLiveReset (0.1.1):
+    - XCUITestKit (~> 0.1.0)
 
 DEPENDENCIES:
   - XCUITestKit (from `../`)
+  - XCUITestLiveReset (from `../`)
 
 EXTERNAL SOURCES:
   XCUITestKit:
     :path: "../"
+  XCUITestLiveReset:
+    :path: "../"
 
 SPEC CHECKSUMS:
-  XCUITestKit: b917af348b8d82c7f06ddbdc63395d427b1cd5e9
+  XCUITestKit: df8e9a806eac753c733c9195e6a42dadd5a5b5fd
+  XCUITestLiveReset: 61bf1b5b69b0ce9020dc30018e6bacc8cb851054
 
-PODFILE CHECKSUM: 0fb9f55a8e6c4d5bd8e3002c9edf9f23591227bd
+PODFILE CHECKSUM: 588dd507bbd140a0accaf7181d83c8ba3983589a
 
 COCOAPODS: 1.9.3

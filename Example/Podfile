@@ -6,6 +6,6 @@ target 'XCUITestKit_Example' do
 
   target 'XCUITestKit_UITests' do
     inherit! :none
-
+    pod 'XCUITestLiveReset', :path => '../'
   end
 end
