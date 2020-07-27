@@ -1,11 +1,25 @@
 platform :ios, '13.0'
 use_frameworks!
+inhibit_all_warnings!
 
+project './XCUITestKit.xcodeproj'
+
+inDevelopment = true
 target 'XCUITestKit_Example' do
-  pod 'XCUITestKit', :path => '../'
-
-  target 'XCUITestKit_UITests' do
-    inherit! :none
-    pod 'XCUITestLiveReset', :path => '../'
+  
+  if inDevelopment
+    pod 'XCUITestLiveReset/Host', :path => '../'
+  else
+    pod 'XCUITestLiveReset/Host', '~> 0.1.0'
   end
+end
+
+target 'XCUITestKit_UITests' do
+  
+  if inDevelopment
+    pod 'XCUITestLiveReset/Client', :path => '../'
+  else
+    pod 'XCUITestLiveReset/Client', '~> 0.1.0'
+  end
+  
 end

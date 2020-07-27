@@ -7,13 +7,18 @@
 //
 
 import XCTest
+import XCUITestLiveReset
 
 class VerifyEmailUITests: XCTestCase {
 
     override func setUpWithError() throws {
         continueAfterFailure = false
-        XCUIApplication().launch()
-        print("SIMULATOR_UDID >>>>>>>>>>>> \(String(describing: ProcessInfo.processInfo.environment["SIMULATOR_UDID"]))")
+        let app = XCUIApplication()
+        LiveResetClient.with {
+            $0.app = app
+            $0.delegate = self
+            $0.launchEnvironment["custom"] = "value"
+        }.resetOrLaunch()
     }
 
     override func tearDownWithError() throws {
@@ -87,5 +92,17 @@ extension XCUIElement {
             deleteString += XCUIKeyboardKey.delete.rawValue
         }
         typeText(deleteString)
+    }
+}
+
+extension XCTest: LiveResetClientDelegate {
+    public func clientShutdown(withFatalError error: Error) {
+        print("Fatal error \(error.localizedDescription)")
+        XCTFail(error.localizedDescription)
+        XCUIApplication().terminate()
+    }
+    
+    public func clientOperationFailed(withError error: Error) {
+        print("Operation error \(error.localizedDescription)")
     }
 }

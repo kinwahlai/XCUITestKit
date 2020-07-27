@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XCUITestLiveReset
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        if let _ = ProcessInfo.processInfo.environment["netServiceName"] {
+            LiveResetHost.shared.delegate = self
+            LiveResetHost.shared.start()
+            reset()
+        } else {
+            reset()
+        }
         return true
     }
 
@@ -44,3 +52,74 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: LiveResetHostDelegate {
+    func didReceiveReset() {
+        reset()
+    }
+    
+    func didReceiveSettings(_ setttings: ServiceSettings) {
+        print("received settings")
+    }
+    
+    
+    @available(iOS 13.0, *)
+    @discardableResult
+    func replaceWindow(_ windowScene: UIWindowScene? = nil) -> UIWindow {
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        main.instantiateInitialViewController()
+        let window: UIWindow
+        if let scene = windowScene {
+            window = UIWindow(frame: scene.coordinateSpace.bounds)
+            window.windowScene = scene
+        } else {
+            window = UIWindow(frame: UIScreen.main.bounds)
+        }
+        window.rootViewController = main.instantiateInitialViewController()
+        window.makeKeyAndVisible()
+        return window
+    }
+}
+
+// Credit to Kassem Wridan: https://www.matrixprojects.net/p/live-reset-for-ui-testing/
+extension AppDelegate {
+    func reset() {
+        tearDown()
+        
+//        Make and create AppDependencies if needed
+        
+        if #available(iOS 13.0, *) {
+            window = injectNewRootViewController(to: createWindow(withScene: nil))
+        } else {
+            window = injectNewRootViewController(to: createWindow())
+        }
+    }
+
+    func tearDown() {
+        window?.rootViewController = nil
+        window?.isHidden = true
+        window = nil
+    }
+
+    @available(iOS 13.0, *)
+    func createWindow(withScene windowScene: UIWindowScene? = nil) -> UIWindow {
+        let window: UIWindow
+        if let scene = windowScene {
+            window = UIWindow(frame: scene.coordinateSpace.bounds)
+            window.windowScene = scene
+        } else {
+            window = UIWindow(frame: UIScreen.main.bounds)
+        }
+        return window
+    }
+    
+    func createWindow() -> UIWindow {
+        return UIWindow(frame: UIScreen.main.bounds)
+    }
+    
+    func injectNewRootViewController(to window: UIWindow) -> UIWindow {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        window.rootViewController = storyboard.instantiateInitialViewController()
+        window.makeKeyAndVisible()
+        return window
+    }
+}

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XCUITestLiveReset'
-  s.version          = '0.1.1'
+  s.version          = '0.1.0'
   s.summary          = 'Continue testing without relaunch application'
 
   s.description      = <<-DESC
@@ -26,17 +26,27 @@ Pod::Spec.new do |s|
   }
   s.social_media_url = 'https://twitter.com/darrenkwlai'
   s.swift_versions = '5.0'
+  s.platform = :ios
   s.ios.deployment_target = '12.0'
+  s.cocoapods_version = '>= 1.4.0'
+  s.static_framework = true
+  s.default_subspec = 'Base'
+  s.dependency 'gRPC-Swift', '1.0.0-alpha.14'
 
-  s.source_files = 'XCUITestLiveReset/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'XCUITestLiveReset' => ['XCUITestLiveReset/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.subspec 'Base' do |base|
+    base.source_files = "XCUITestLiveReset/Classes/Shared/**/*.{swift, m, h}"
+  end
 
   s.dependency 'XCUITestKit', '~> 0.1.0'
+  s.subspec 'Client' do |c|
+    c.frameworks = 'XCTest'
+    c.pod_target_xcconfig = { :prebuild_configuration => 'debug', 'ENABLE_BITCODE' => 'NO' }
+    c.dependency 'XCUITestLiveReset/Base'
+    c.source_files = "XCUITestLiveReset/Classes/Client/**/*.{swift, m, h}"
+  end
+  
+  s.subspec 'Host' do |h|
+    h.dependency 'XCUITestLiveReset/Base'
+    h.source_files = "XCUITestLiveReset/Classes/Host/**/*.{swift, m, h}"
+  end
 end

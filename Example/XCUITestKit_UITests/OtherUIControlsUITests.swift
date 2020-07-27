@@ -7,13 +7,18 @@
 //
 
 import XCTest
+import XCUITestLiveReset
 
 class OtherUIControlsUITests: XCTestCase {
 
     override func setUpWithError() throws {
         continueAfterFailure = false
-        XCUIApplication().launch()
-        print("SIMULATOR_UDID >>>>>>>>>>>> \(String(describing: ProcessInfo.processInfo.environment["SIMULATOR_UDID"]))")
+        let app = XCUIApplication()
+        LiveResetClient.with {
+            $0.app = app
+            $0.delegate = self
+            $0.launchEnvironment["custom"] = "value"
+        }.resetOrLaunch()
     }
 
     override func tearDownWithError() throws {

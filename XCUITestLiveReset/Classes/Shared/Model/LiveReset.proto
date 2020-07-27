@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package XCUITestKit;
+
+// The XCUILiveResetKit service definition.
+service LiveReset {
+    rpc Heartbeat (Echo) returns (Echo) {}
+    rpc Reset (Empty) returns (Ack) {}
+    rpc Configure(Settings) returns (Ack) {} // should COnfigure a stream type?
+}
+
+// The response message.
+message Ack {
+    string message = 1;
+}
+
+// From: https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/empty.proto
+// A generic empty message that you can re-use to avoid defining duplicated
+// empty messages in your APIs. A typical example is to use it as the request
+// or the response type of an API method. For instance:
+//
+//     service Foo {
+//       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+//     }
+//
+message Empty {}
+
+message Settings {
+    map<string, OneOf> Setting = 1;
+}
+
+message OneOf {
+    oneof types {
+        string stringValue = 2;
+        bool boolValue = 3;
+        double doubleValue = 4;
+        int32 intValue = 5;
+    }
+}
+
+message Echo {
+    string message = 1;
+}

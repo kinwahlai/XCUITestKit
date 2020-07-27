@@ -1,0 +1,62 @@
+//
+//  GlobalExtensions.swift
+//  GRPC_Bonjour_LiveReset
+//
+//  Created by Darren Lai on 7/4/20.
+//  Copyright © 2020 kinwahlai.com. All rights reserved.
+//
+
+import Foundation
+
+extension String {
+    public var fileURL: URL {
+        URL(fileURLWithPath: self)
+    }
+
+    public var lastPathComponent: String {
+        get { fileURL.lastPathComponent }
+    }
+}
+
+@propertyWrapper
+public struct DelayedMutable<Value> {
+    public typealias Factory = () -> Value
+    private var _value: Value? = nil
+    private var _factory: Factory? = nil
+    
+    public var wrappedValue: Value {
+        mutating get {
+            guard let value = _value else {
+                if let newValue = _factory?() {
+                    _value = newValue
+                    return newValue
+                } else {
+                    fatalError("property accessed before being initialized")
+                }
+            }
+            return value
+        }
+        mutating set {
+            _factory = { newValue }
+        }
+    }
+    public init() {}
+    public init(_ factory: Factory?) {
+        _factory = factory
+    }
+    
+    public mutating func set(Factory factory: Factory?) {
+        _factory = factory
+    }
+    
+    public mutating func reset() {
+        _value = nil
+    }
+}
+
+@_functionBuilder
+public struct DescriptionBuilder {
+    static func buildBlock(_ parts: String...) -> String {
+        parts.joined(separator: "\n")
+    }
+}
