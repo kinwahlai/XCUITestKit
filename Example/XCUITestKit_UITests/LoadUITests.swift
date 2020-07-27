@@ -9,6 +9,12 @@
 import XCTest
 import XCUITestLiveReset
 
+func assertgRPCServerStarted() {
+    let app = XCUIApplication()
+    XCTAssertTrue(app.staticTexts["gRPC server started on port: \(LiveResetClient.shared.port)"].exists)
+    XCTAssertTrue(app.staticTexts["\(LiveResetClient.shared.netServiceName)"].exists)
+}
+
 class LoadUITests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -18,7 +24,6 @@ class LoadUITests: XCTestCase {
         LiveResetClient.with {
             $0.app = app
             $0.delegate = self
-            $0.launchEnvironment["custom"] = "value"
         }.resetOrLaunch()
     }
 
@@ -28,6 +33,9 @@ class LoadUITests: XCTestCase {
     func actualTestFunction() throws {
         let app = XCUIApplication()
         XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
+        
+        assertgRPCServerStarted()
+        
         app.tables.staticTexts["btn_testUIControls"].tap()
         XCTAssertEqual(app.staticTexts["headline_label"].title, "")
         

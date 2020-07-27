@@ -22,8 +22,8 @@ public protocol LiveResetHostDelegate: class { // implement by class that will h
 public class LiveResetHost {
     public var defaultTimeout: Double = 10.0
     public weak var delegate: LiveResetHostDelegate?
-    
-    private(set) var port: Int = 0
+    public private(set) var remoteSettings: ServiceSettings = ServiceSettings()
+    public private(set) var port: Int = 0
     
     @DelayedMutable
     private var netServiceHost: NetServiceHost
@@ -34,7 +34,7 @@ public class LiveResetHost {
     @DelayedMutable
     private var grpcHost: gRPCHost
     
-    private(set) var netServiceName: String = "defaultName"
+    public private(set) var netServiceName: String = "defaultName"
     
     internal var netServiceBroadcasted: Bool = false
     

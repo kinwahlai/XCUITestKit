@@ -42,7 +42,7 @@ public class LiveResetClient {
     
     internal var netServiceResolved: Bool = false
     private var sharedInstanceConfigured: Bool = false
-    private(set) var port: Int = 0
+    public private(set) var port: Int = 0
     private let group: EventLoopGroup = PlatformSupport.makeEventLoopGroup(loopCount: 1)
     
     private init() {

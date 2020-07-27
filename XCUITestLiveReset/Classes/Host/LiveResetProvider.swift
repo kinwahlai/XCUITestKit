@@ -10,7 +10,6 @@ import NIO
 import GRPC
 
 protocol CallHandlerForwarder: class {
-    // TODO: use Combine for subscribe?
     func didReceiveReset()
     func didReceiveSettings(_ setttings: ServiceSettings)
 }

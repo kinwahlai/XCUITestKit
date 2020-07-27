@@ -14,6 +14,7 @@ class VerifyEmailUITests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
         let app = XCUIApplication()
+//        app.launch()
         LiveResetClient.with {
             $0.app = app
             $0.delegate = self

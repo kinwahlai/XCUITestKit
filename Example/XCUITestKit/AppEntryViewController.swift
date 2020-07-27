@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XCUITestLiveReset
 
 class AppEntryViewController: UITableViewController {
     @IBOutlet weak var liveResetDetails: UITableViewCell!
@@ -16,13 +17,13 @@ class AppEntryViewController: UITableViewController {
         title = "XCUITestKit Example"
         navigationController?.navigationBar.prefersLargeTitles = true
         self.clearsSelectionOnViewWillAppear = false
-        liveResetDetails.textLabel?.text = "gRPC server started on port: -"
-        liveResetDetails.detailTextLabel?.text = "-"
+        liveResetDetails.textLabel?.text = "gRPC server started on port: \(LiveResetHost.shared.port)"
+        liveResetDetails.detailTextLabel?.text = "\(LiveResetHost.shared.netServiceName)"
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Live reset enabled: \(false)"
+            return "Live reset gRPC configuration"
         }
         return "Tests"
     }

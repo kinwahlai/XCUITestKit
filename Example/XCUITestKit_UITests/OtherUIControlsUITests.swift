@@ -17,7 +17,7 @@ class OtherUIControlsUITests: XCTestCase {
         LiveResetClient.with {
             $0.app = app
             $0.delegate = self
-            $0.launchEnvironment["custom"] = "value"
+            $0.launchEnvironment["example"] = "value"
         }.resetOrLaunch()
     }
 
