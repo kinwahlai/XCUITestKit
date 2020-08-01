@@ -15,8 +15,8 @@ public enum LiveResetHostError: Error {
 }
 
 public protocol LiveResetHostDelegate: class { // implement by class that will handle the reset
-        func didReceiveReset()
-        func didReceiveSettings(_ setttings: ServiceSettings)
+    func didReceiveReset()
+    func didReceiveSettings(_ setttings: ServiceSettings)
 }
 
 public class LiveResetHost {
@@ -80,8 +80,8 @@ public class LiveResetHost {
                     self.acceptRequest()
                 case .failure(let err):
                     print("Failed to resolve NetService \(err.localizedDescription)")
-                    // FIXME: how to handle this?
-                    // Shutdown?
+                // FIXME: how to handle this?
+                // Shutdown?
             }
         }
     }
@@ -111,6 +111,12 @@ extension LiveResetHost: CallHandlerForwarder {
     func didReceiveSettings(_ setttings: ServiceSettings) {
         delegate?.didReceiveSettings(setttings)
     }
-    
-    
+}
+
+extension LiveResetHost {
+    public static var isAvailable: Bool {
+        guard let serviceName = ProcessInfo.processInfo.environment[SharedKey.NetServiceName],
+            let _ = ProcessInfo.processInfo.environment[SharedKey.LiveResetVersion] else { return false }
+        return serviceName.hasPrefix(SharedKey.NetServicePrefix)
+    }
 }

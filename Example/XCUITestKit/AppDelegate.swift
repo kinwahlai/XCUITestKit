@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        if let _ = ProcessInfo.processInfo.environment["NetServiceName"] {
+        if LiveResetHost.isAvailable {
             LiveResetHost.shared.delegate = self
             LiveResetHost.shared.start()
             reset()
@@ -52,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: LiveResetHostDelegate {
+    
     func didReceiveReset() {
         reset()
     }

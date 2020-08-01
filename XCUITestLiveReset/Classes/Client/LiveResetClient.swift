@@ -47,7 +47,7 @@ public class LiveResetClient {
     
     private init() {
         _netServiceName.set {
-            String.init(format: "com.darrenlai.grpc.%d.%.0f",  ProcessInfo.processInfo.processIdentifier, Date().timeIntervalSince1970 * 100_000)
+            String.init(format: "\(SharedKey.NetServicePrefix).%d.%.0f",  ProcessInfo.processInfo.processIdentifier, Date().timeIntervalSince1970 * 100_000)
         }
         _netServiceClient.set { [unowned self] in
             NetServiceClient(name: self.netServiceName)

@@ -16,6 +16,7 @@ var LIVE_RESET_VERSION: String {
 public enum SharedKey {
     static let NetServiceName = "NetServiceName"
     static let LiveResetVersion = "LiveResetVersion"
+    static let NetServicePrefix = "com.darrenlai.grpc"
 }
 
 extension String {
