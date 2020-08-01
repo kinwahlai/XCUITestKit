@@ -9,6 +9,7 @@ whitelist_rules:
   - unowned_variable_capture
 
 excluded:
+  - .build
   - "**/.build"
   - "**/Pods"
 
@@ -37,4 +38,4 @@ file_length:
 
 indentation: 2
 
-reporter: "markdown" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji, sonarqube, markdown)
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji, sonarqube, markdown)

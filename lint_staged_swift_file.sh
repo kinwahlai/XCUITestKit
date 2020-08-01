@@ -22,7 +22,7 @@ done
 swiftlint=${swiftlint:-'swift run swiftlint'}
 
 # formatter will apply fix directly to staged file
-format_cmd="git-format-staged --no-write --formatter '$swiftlint --config .swiftlint.yml --path '{}'' '*.swift'"
+format_cmd="git-format-staged --no-write --formatter '$swiftlint --config .swiftlint.yml --reporter emoji --path '{}'' '*.swift'"
 
 echo "${format_cmd}"
 eval ${format_cmd};
