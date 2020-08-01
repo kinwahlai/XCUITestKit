@@ -98,7 +98,7 @@ extension XCUIElement {
 
 extension XCTest: LiveResetClientDelegate {
     public func clientShutdown(withFatalError error: Error) {
-        print("Fatal error \(error.localizedDescription)")
+        print("Fatal error - \(error.localizedDescription)")
         XCTFail(error.localizedDescription)
         XCUIApplication().terminate()
     }

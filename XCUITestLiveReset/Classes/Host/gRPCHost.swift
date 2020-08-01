@@ -10,7 +10,7 @@ import NIO
 import GRPC
 
 class gRPCHost {
-    private let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+    private let group: EventLoopGroup = PlatformSupport.makeEventLoopGroup(loopCount: 1)
     @DelayedMutable
     private var server: EventLoopFuture<Server>
     private(set) var isServerStarted: Bool = false
