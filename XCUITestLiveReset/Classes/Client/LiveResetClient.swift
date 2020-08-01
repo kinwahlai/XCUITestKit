@@ -100,7 +100,8 @@ public class LiveResetClient {
         if !sharedInstanceConfigured || config.reconfigureSharedInstance {
             config.app.launchArguments.append(contentsOf: config.launchArguments)
             config.launchEnvironment.forEach({ config.app.launchEnvironment[$0] =  $1 })
-            config.app.launchEnvironment["netServiceName"] = netServiceName
+            config.app.launchEnvironment[SharedKey.LiveResetVersion] = LIVE_RESET_VERSION
+            config.app.launchEnvironment[SharedKey.NetServiceName] = netServiceName
             app = config.app
             delegate = config.delegate
             defaultTimeout = config.defaultTimeout
@@ -128,7 +129,7 @@ public class LiveResetClient {
                     self.port = port
                     print(">>>>>>>>>>> port \(self.netServiceName)")
                     print(">>>>>>>>>>> port \(self.port)")
-                case .error(let err):
+                case .failure(let err):
                     print("Failed to resolve NetService \(err.localizedDescription)")
                     self.delegate?.clientShutdown(withFatalError: err)
             }
@@ -140,7 +141,7 @@ public class LiveResetClient {
         switch grpcClient.reset() {
             case .success(let message):
                 print("Reset operation completed \(message)")
-            case .error(let err):
+            case .failure(let err):
                 print("gRPC Reset operation failed \(err.localizedDescription)")
                 self.delegate?.clientOperationFailed(withError: err)
         }
@@ -152,7 +153,7 @@ public class LiveResetClient {
         switch grpcClient.configure(settings: settings) {
             case .success(let message):
                 print("Configure operation completed \(message)")
-            case .error(let err):
+            case .failure(let err):
                 print("gRPC Configure operation failed \(err.localizedDescription)")
                 self.delegate?.clientOperationFailed(withError: err)
         }

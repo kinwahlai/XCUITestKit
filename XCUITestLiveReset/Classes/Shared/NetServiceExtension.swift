@@ -15,8 +15,3 @@ public enum NetServiceError: Error {
     case notPublish([String: NSNumber])
     case unknownError
 }
-
-public enum Result<Success, Failure> where Failure : Error {
-    case success(Success)
-    case error(Failure)
-}

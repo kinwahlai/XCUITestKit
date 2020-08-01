@@ -38,7 +38,7 @@ extension NetServiceHost: NetServiceDelegate {
         completion?(.success(sender.port))
     }
     public func netService(_ sender: NetService, didNotPublish errorDict: [String : NSNumber]) {
-        completion?(.error(.notPublish(errorDict)))
+        completion?(.failure(.notPublish(errorDict)))
     }
 }
 

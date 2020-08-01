@@ -39,7 +39,7 @@ public class LiveResetHost {
     internal var netServiceBroadcasted: Bool = false
     
     private init() {
-        if let bonjourName = ProcessInfo.processInfo.environment["netServiceName"] {
+        if let bonjourName = ProcessInfo.processInfo.environment[SharedKey.NetServiceName] {
             self.netServiceName = bonjourName
         }
         _grpcHost.set { [unowned self] () -> gRPCHost in
@@ -78,7 +78,7 @@ public class LiveResetHost {
                     print(">>>>>>>>>>> port \(self.netServiceName)")
                     print(">>>>>>>>>>> port \(self.port)")
                     self.acceptRequest()
-                case .error(let err):
+                case .failure(let err):
                     print("Failed to resolve NetService \(err.localizedDescription)")
                     // FIXME: how to handle this?
                     // Shutdown?

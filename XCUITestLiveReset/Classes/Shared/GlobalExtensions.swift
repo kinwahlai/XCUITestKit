@@ -8,6 +8,16 @@
 
 import Foundation
 
+var LIVE_RESET_VERSION: String {
+    guard let version = Bundle(identifier: "org.cocoapods.XCUITestLiveReset")?.infoDictionary?["CFBundleShortVersionString"] as? String else { return "0.0.0" }
+    return version
+}
+
+public enum SharedKey {
+    static let NetServiceName = "NetServiceName"
+    static let LiveResetVersion = "LiveResetVersion"
+}
+
 extension String {
     public var fileURL: URL {
         URL(fileURLWithPath: self)

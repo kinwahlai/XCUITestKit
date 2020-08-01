@@ -54,7 +54,7 @@ class gRPCCLient {
             let response = try request.response.wait()
             return .success(response.message.compare(message))
         } catch {
-            return .error(.connectionLost(error))
+            return .failure(.connectionLost(error))
         }
     }
     
@@ -64,7 +64,7 @@ class gRPCCLient {
             let response = try request.response.wait()
             return .success(response.message)
         } catch {
-            return .error(.resetFailed(error))
+            return .failure(.resetFailed(error))
         }
     }
     
@@ -76,7 +76,7 @@ class gRPCCLient {
             let response = try request.response.wait()
             return .success(response.message)
         } catch {
-            return .error(.configureFailed(error))
+            return .failure(.configureFailed(error))
         }
     }
 }
