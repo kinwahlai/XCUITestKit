@@ -15,15 +15,15 @@ class ScrollableViewController: UIViewController {
     let tableviewSourceDelegate = TableViewDataSourceDelegate()
     // swiftlint:disable:next weak_delegate
     let collectionviewSourceDelegate = CollectionViewDataSourceDelegate()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Hello Scrollable"
+        title = "Hello Scrollable"
         tableviewSourceDelegate.registerCell(with: tableView)
         tableView.delegate = tableviewSourceDelegate
         tableView.dataSource = tableviewSourceDelegate
         tableView.accessibilityIdentifier = "tableview"
-        
+
         collectionviewSourceDelegate.registerCell(with: collectionView)
         collectionView.delegate = collectionviewSourceDelegate
         collectionView.dataSource = collectionviewSourceDelegate

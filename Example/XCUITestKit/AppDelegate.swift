@@ -52,16 +52,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: LiveResetHostDelegate {
-    
+
     func didReceiveReset() {
         reset()
     }
-    
+
     func didReceiveSettings(_ setttings: ServiceSettings) {
         print("received settings")
     }
-    
-    
+
+
     @available(iOS 13.0, *)
     @discardableResult
     func replaceWindow(_ windowScene: UIWindowScene? = nil) -> UIWindow {
@@ -84,9 +84,9 @@ extension AppDelegate: LiveResetHostDelegate {
 extension AppDelegate {
     func reset() {
         tearDown()
-        
+
 //        Make and create AppDependencies if needed
-        
+
         if #available(iOS 13.0, *) {
             window = injectNewRootViewController(to: createWindow(withScene: nil))
         } else {
@@ -111,11 +111,11 @@ extension AppDelegate {
         }
         return window
     }
-    
+
     func createWindow() -> UIWindow {
         return UIWindow(frame: UIScreen.main.bounds)
     }
-    
+
     func injectNewRootViewController(to window: UIWindow) -> UIWindow {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         window.rootViewController = storyboard.instantiateInitialViewController()

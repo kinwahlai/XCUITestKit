@@ -13,11 +13,11 @@ class ItemPickerDataSourceDelegate: NSObject, UIPickerViewDataSource, UIPickerVi
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         items.count
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         items[row]
     }
@@ -30,7 +30,7 @@ class UIControlsViewController: UIViewController {
     @IBOutlet weak var switchControl: UISwitch!
     @IBOutlet weak var cityPicker: UIPickerView!
     let pickerData = ItemPickerDataSourceDelegate()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.accessibilityIdentifier = "element_screen"
@@ -39,7 +39,7 @@ class UIControlsViewController: UIViewController {
         cityPicker.delegate = pickerData
         title = "UI Controls"
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let deadlineTime = DispatchTime.now() + .seconds(3)
@@ -55,9 +55,9 @@ class UIControlsViewController: UIViewController {
     @IBAction func showAlert(_ sender: Any) {
         let alertController = UIAlertController(title: "Alert", message: "show this for testing", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
-    
+
     @IBAction func verifyEmail(_ sender: Any) {
         guard let fieldValue = emailTextField.text, fieldValue.contains("@") else {
             emailFieldError.text = "Please enter a valid email"

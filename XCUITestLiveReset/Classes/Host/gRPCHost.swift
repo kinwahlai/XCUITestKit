@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import NIO
 import GRPC
+import NIO
 
 // swiftlint:disable:next type_name
 class gRPCHost {
@@ -15,24 +15,24 @@ class gRPCHost {
     @DelayedMutable
     private var server: EventLoopFuture<Server>
     private(set) var isServerStarted: Bool = false
-    
+
     init(port: Int, callHandler: CallHandlerProvider) {
         _server.set { [unowned self] () -> EventLoopFuture<Server> in
             Server.insecure(group: self.group).withServiceProviders([callHandler])
                 .bind(host: "localhost", port: port)
         }
     }
-    
+
     deinit {
-        print(("👉 deinit \(#file.lastPathComponent)"))
+        print("👉 deinit \(#file.lastPathComponent)")
         shutdown()
     }
-    
+
     func shutdown() {
         try! server.eventLoop.syncShutdownGracefully()
         try! group.syncShutdownGracefully()
     }
-    
+
     func acceptRequest() {
         server.map {
             $0.channel.localAddress

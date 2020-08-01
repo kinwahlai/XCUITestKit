@@ -34,7 +34,7 @@ public struct DelayedMutable<Value> {
     public typealias Factory = () -> Value
     private var _value: Value? = nil
     private var _factory: Factory? = nil
-    
+
     public var wrappedValue: Value {
         mutating get {
             guard let value = _value else {
@@ -55,11 +55,11 @@ public struct DelayedMutable<Value> {
     public init(_ factory: Factory?) {
         _factory = factory
     }
-    
+
     public mutating func set(Factory factory: Factory?) {
         _factory = factory
     }
-    
+
     public mutating func reset() {
         _value = nil
     }

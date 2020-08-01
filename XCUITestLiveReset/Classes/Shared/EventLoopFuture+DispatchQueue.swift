@@ -11,23 +11,23 @@ import NIO
 
 extension EventLoopFuture {
     public func whenSuccess(queue: DispatchQueue, _ callback: @escaping (Value) -> Void) {
-        self.whenSuccess { (v) in
+        whenSuccess { v in
             queue.async {
                 callback(v)
             }
         }
     }
-    
+
     public func whenComplete(queue: DispatchQueue, _ callback: @escaping (Result<Value, Error>) -> Void) {
-        self.whenComplete { (result) in
+        whenComplete { result in
             queue.async {
                 callback(result)
             }
         }
     }
-    
+
     public func always(queue: DispatchQueue, _ callback: @escaping (Result<Value, Error>) -> Void) -> EventLoopFuture<Value> {
-        self.whenComplete(queue: queue, callback)
+        whenComplete(queue: queue, callback)
         return self
     }
 }

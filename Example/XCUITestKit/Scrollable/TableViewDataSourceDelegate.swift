@@ -12,11 +12,11 @@ class TableViewDataSourceDelegate: NSObject, UITableViewDelegate,  UITableViewDa
     func registerCell(with tableView: UITableView) {
         tableView.register(ThirtyDayCell.self, forCellReuseIdentifier: "cellId")
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 30
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! ThirtyDayCell
         cell.backgroundColor = UIColor.white
@@ -24,7 +24,7 @@ class TableViewDataSourceDelegate: NSObject, UITableViewDelegate,  UITableViewDa
         cell.accessibilityIdentifier = "Cell_Sec\(indexPath.section)_Row\(indexPath.row)"
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }

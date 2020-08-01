@@ -6,11 +6,11 @@
 //  Copyright © 2020 kinwahlai.com. All rights reserved.
 //
 
-import Foundation
-import XCTest
-import NIO
-import GRPC
 import Combine
+import Foundation
+import GRPC
+import NIO
+import XCTest
 
 public protocol LiveResetClientDelegate: class { // implement by XCTest class
     func clientShutdown(withFatalError error: Error)
@@ -33,18 +33,18 @@ public class LiveResetClient {
 //    singleton to make the client instance stay over multiple test suites
     @DelayedMutable({ LiveResetClient() })
     public static var shared: LiveResetClient
-    
+
     @DelayedMutable
     private var netServiceClient: NetServiceClient
-    
+
     @DelayedMutable
     private var grpcClient: gRPCCLient
-    
+
     internal var netServiceResolved: Bool = false
     private var sharedInstanceConfigured: Bool = false
     public private(set) var port: Int = 0
     private let group: EventLoopGroup = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-    
+
     private init() {
         _netServiceName.set {
             String.init(format: "\(SharedKey.NetServicePrefix).%d.%.0f",  ProcessInfo.processInfo.processIdentifier, Date().timeIntervalSince1970 * 100_000)
@@ -56,16 +56,16 @@ public class LiveResetClient {
             gRPCCLient(port: self.port, group: self.group)
         }
     }
-    
+
     deinit {
-        print(("👉 deinit \(#file.lastPathComponent)"))
+        print("👉 deinit \(#file.lastPathComponent)")
         do {
             try group.syncShutdownGracefully()
         } catch {
             print(error.localizedDescription)
         }
     }
-    
+
     public func shutdown(_ error: Error? = nil) {
         netServiceClient.shutdown()
         grpcClient.shutdown()
@@ -83,7 +83,7 @@ public class LiveResetClient {
         _netServiceClient.reset()
         _netServiceName.reset()
     }
-    
+
     public func resetOrLaunch() {
         precondition(delegate != nil, "Delegate must be there to accept ready to launch call")
         if netServiceResolved == false {
@@ -95,7 +95,7 @@ public class LiveResetClient {
             reset()
         }
     }
-    
+
     func configureInstance(withConfiguration config: LiveResetClientConfiguration) {
         if !sharedInstanceConfigured || config.reconfigureSharedInstance {
             config.app.launchArguments.append(contentsOf: config.launchArguments)
@@ -108,9 +108,9 @@ public class LiveResetClient {
             sharedInstanceConfigured = true
         }
     }
-    
+
     private func waitForHostReady() {
-        for _ in (0..<Int(defaultTimeout)) {
+        for _ in 0..<Int(defaultTimeout) {
             if netServiceResolved, grpcClient.isConnectionEstablished {
                 return
             }
@@ -119,9 +119,9 @@ public class LiveResetClient {
         // host is not ready, it is a fatal error
         shutdown(LiveResetClientError.hostOrAppNotReady)
     }
-    
+
     private func resolve(timeout: Double) {
-        netServiceClient.resolve(timeout: timeout) { [weak self] (result) in
+        netServiceClient.resolve(timeout: timeout) { [weak self] result in
             guard let self = self else { return }
             switch result {
                 case .success(let port):
@@ -135,7 +135,7 @@ public class LiveResetClient {
             }
         }
     }
-    
+
     private func reset() {
         precondition(netServiceResolved == true, "NetService resolve must be called first")
         switch grpcClient.reset() {
@@ -143,10 +143,10 @@ public class LiveResetClient {
                 print("Reset operation completed \(message)")
             case .failure(let err):
                 print("gRPC Reset operation failed \(err.localizedDescription)")
-                self.delegate?.clientOperationFailed(withError: err)
+                delegate?.clientOperationFailed(withError: err)
         }
     }
-    
+
     // MARK: - Client Operations
     public func configure(settings: ServiceSettings) {
         precondition(netServiceResolved == true, "NetService resolve must be called first")
@@ -155,7 +155,7 @@ public class LiveResetClient {
                 print("Configure operation completed \(message)")
             case .failure(let err):
                 print("gRPC Configure operation failed \(err.localizedDescription)")
-                self.delegate?.clientOperationFailed(withError: err)
+                delegate?.clientOperationFailed(withError: err)
         }
     }
 }

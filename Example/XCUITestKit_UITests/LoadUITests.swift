@@ -29,21 +29,21 @@ class LoadUITests: XCTestCase {
 
     override func tearDownWithError() throws {
     }
-    
+
     func actualTestFunction() throws {
         let app = XCUIApplication()
         XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
-        
+
         assertgRPCServerStarted()
-        
+
         app.tables.staticTexts["btn_testUIControls"].tap()
         XCTAssertEqual(app.staticTexts["headline_label"].title, "")
-        
+
         app.textFields["email_textfield"].tap()
         app.textFields["email_textfield"].typeText("valid@email.com")
         let verifyEmailButton = app.buttons["verifyEmailButton"].staticTexts["verify email"]
         verifyEmailButton.tap()
-        
+
         XCTAssertFalse(app.staticTexts["emailFieldError"].exists)
     }
 

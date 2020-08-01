@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import NIO
 import GRPC
+import NIO
 
 protocol CallHandlerForwarder: class {
     func didReceiveReset()
@@ -16,7 +16,7 @@ protocol CallHandlerForwarder: class {
 
 class LiveResetProvider {
     weak var delegate: CallHandlerForwarder?
-    
+
     init(delegate: CallHandlerForwarder) {
         self.delegate = delegate
     }
@@ -29,14 +29,14 @@ extension LiveResetProvider: XCUITestKit_LiveResetProvider {
         print("heartbeat response sent")
         return context.eventLoop.makeSucceededFuture(response)
     }
-    
+
     func configure(request: XCUITestKit_Settings, context: StatusOnlyCallContext) -> EventLoopFuture<XCUITestKit_Ack> {
         let settings: ServiceSettings = ServiceSettings(request.setting)
         delegate?.didReceiveSettings(settings)
         let response = XCUITestKit_Ack.with { $0.message = "accepted" }
         return context.eventLoop.makeSucceededFuture(response)
     }
-    
+
     func reset(request: XCUITestKit_Empty, context: StatusOnlyCallContext) -> EventLoopFuture<XCUITestKit_Ack> {
         DispatchQueue.main.sync {
             delegate?.didReceiveReset()

@@ -12,12 +12,12 @@ import XCUITestLiveReset
 class RemoteConfigViewController: UIViewController {
     @IBOutlet weak var remoteConfigReceived: UILabel!
     @IBOutlet weak var configView: UITextView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configView.text = "aaa"
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }

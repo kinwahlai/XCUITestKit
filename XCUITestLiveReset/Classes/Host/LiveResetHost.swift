@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import NIO
 import GRPC
+import NIO
 
 public enum LiveResetHostError: Error {
     case serverFailedToStart
@@ -24,23 +24,23 @@ public class LiveResetHost {
     public weak var delegate: LiveResetHostDelegate?
     public private(set) var remoteSettings: ServiceSettings = ServiceSettings()
     public private(set) var port: Int = 0
-    
+
     @DelayedMutable
     private var netServiceHost: NetServiceHost
-    
+
     @DelayedMutable({ LiveResetHost() })
     public static var shared: LiveResetHost
-    
+
     @DelayedMutable
     private var grpcHost: gRPCHost
-    
+
     public private(set) var netServiceName: String = "defaultName"
-    
+
     internal var netServiceBroadcasted: Bool = false
-    
+
     private init() {
         if let bonjourName = ProcessInfo.processInfo.environment[SharedKey.NetServiceName] {
-            self.netServiceName = bonjourName
+            netServiceName = bonjourName
         }
         _grpcHost.set { [unowned self] () -> gRPCHost in
             gRPCHost(port: self.port, callHandler: LiveResetProvider(delegate: self))
@@ -48,18 +48,18 @@ public class LiveResetHost {
         _netServiceHost.set { [unowned self] () -> NetServiceHost in
             NetServiceHost(name: self.netServiceName)
         }
-        
-        
+
+
     }
-    
+
     deinit {
         print("👉 deinit \(#file.lastPathComponent)")
     }
-    
+
     public func shutdown(_ error: Error? = nil) {
         print(error.debugDescription)
     }
-    
+
     public func start() {
         guard netServiceBroadcasted == false && port == 0 else {
             return
@@ -67,9 +67,9 @@ public class LiveResetHost {
         broadcast(timeout: defaultTimeout)
         waitForServerReady()
     }
-    
+
     private func broadcast(timeout: Double) {
-        netServiceHost.broadcast { [weak self] (result) in
+        netServiceHost.broadcast { [weak self] result in
             guard let self = self else { return }
             switch result {
                 case .success(let port):
@@ -85,13 +85,13 @@ public class LiveResetHost {
             }
         }
     }
-    
+
     private func acceptRequest() {
         grpcHost.acceptRequest()
     }
-    
+
     private func waitForServerReady() {
-        for _ in (0..<Int(defaultTimeout)) {
+        for _ in 0..<Int(defaultTimeout) {
             if netServiceBroadcasted, grpcHost.isServerStarted {
                 return
             }
@@ -107,7 +107,7 @@ extension LiveResetHost: CallHandlerForwarder {
     func didReceiveReset() {
         delegate?.didReceiveReset()
     }
-    
+
     func didReceiveSettings(_ setttings: ServiceSettings) {
         delegate?.didReceiveSettings(setttings)
     }

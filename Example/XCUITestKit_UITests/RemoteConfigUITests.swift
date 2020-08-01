@@ -28,7 +28,7 @@ class RemoteConfigUITests: XCTestCase {
         XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
         app.tables.staticTexts["btn_testUIControls"].tap()
         app.navigationBars["UI Controls"].buttons["More"].tap()
-        
+
         XCTAssertEqual(app.textViews["configView"].value as! String, "aaa")
     }
 
