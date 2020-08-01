@@ -29,7 +29,6 @@ let config = PackageConfiguration([
             "echo '[🤖 Starting pre-commit tasks]'",
             "echo '[🤖 Running Swiftformat]'",
             "./format_staged_swift_file.sh;" ,
-            "git add .",
             "echo '[🤖 Pre-commit tasks complete]'",
         ],
         "pre-push": [
