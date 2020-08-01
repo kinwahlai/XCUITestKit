@@ -54,7 +54,7 @@ class UIControlsViewController: UIViewController {
 
     @IBAction func showAlert(_ sender: Any) {
         let alertController = UIAlertController(title: "Alert", message: "show this for testing", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
 

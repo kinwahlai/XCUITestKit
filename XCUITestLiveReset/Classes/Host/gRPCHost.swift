@@ -11,14 +11,13 @@ import NIO
 
 // swiftlint:disable:next type_name
 class gRPCHost {
-    private let group: EventLoopGroup = PlatformSupport.makeEventLoopGroup(loopCount: 1)
     @DelayedMutable
     private var server: EventLoopFuture<Server>
     private(set) var isServerStarted: Bool = false
 
-    init(port: Int, callHandler: CallHandlerProvider) {
+    init(port: Int, callHandler: CallHandlerProvider, group: EventLoopGroup) {
         _server.set { [unowned self] () -> EventLoopFuture<Server> in
-            Server.insecure(group: self.group).withServiceProviders([callHandler])
+            Server.insecure(group: group).withServiceProviders([callHandler])
                 .bind(host: "localhost", port: port)
         }
     }
@@ -29,8 +28,6 @@ class gRPCHost {
     }
 
     func shutdown() {
-        try! server.eventLoop.syncShutdownGracefully()
-        try! group.syncShutdownGracefully()
     }
 
     func acceptRequest() {

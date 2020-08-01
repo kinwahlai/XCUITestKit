@@ -20,6 +20,7 @@ public protocol LiveResetHostDelegate: class { // implement by class that will h
 }
 
 public class LiveResetHost {
+    private let group: EventLoopGroup
     public var defaultTimeout: Double = 10.0
     public weak var delegate: LiveResetHostDelegate?
     public private(set) var remoteSettings: ServiceSettings = ServiceSettings()
@@ -39,11 +40,13 @@ public class LiveResetHost {
     internal var netServiceBroadcasted: Bool = false
 
     private init() {
+        group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
+
         if let bonjourName = ProcessInfo.processInfo.environment[SharedKey.NetServiceName] {
             netServiceName = bonjourName
         }
         _grpcHost.set { [unowned self] () -> gRPCHost in
-            gRPCHost(port: self.port, callHandler: LiveResetProvider(delegate: self))
+            gRPCHost(port: self.port, callHandler: LiveResetProvider(delegate: self), group: self.group)
         }
         _netServiceHost.set { [unowned self] () -> NetServiceHost in
             NetServiceHost(name: self.netServiceName)
@@ -54,6 +57,11 @@ public class LiveResetHost {
 
     deinit {
         print("👉 deinit \(#file.lastPathComponent)")
+        do {
+            try group.syncShutdownGracefully()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
     public func shutdown(_ error: Error? = nil) {

@@ -12,7 +12,7 @@ import GRPC
 import NIO
 import XCTest
 
-public protocol LiveResetClientDelegate: class { // implement by XCTest class
+public protocol LiveResetClientDelegate: class {
     func clientShutdown(withFatalError error: Error)
     func clientOperationFailed(withError error: Error)
 }
