@@ -17,18 +17,31 @@ let package = Package(
             dependencies: [],
             path: "XCUITestLiveReset/Classes",
             sources: ["Fake.swift"]),
-        ]
+    ]
 )
 
 #if canImport(PackageConfig)
-    import PackageConfig
+import PackageConfig
 
-    let config = PackageConfiguration([
-        "komondor": [
-            "pre-commit": [
-                "./format_staged_swift_file.sh;" ,
-                "./lint_staged_swift_file.sh;" ,
-            ],
+let config = PackageConfiguration([
+    "komondor": [
+        "pre-commit": [
+            "echo '[🤖 Starting pre-commit tasks]'",
+            "echo '[🤖 Running Swiftformat]'",
+            "./format_staged_swift_file.sh;" ,
+            "git add .",
+            "echo '[🤖 Pre-commit tasks complete]'",
         ],
-    ]).write()
+        "pre-push": [
+            "echo '[🤖 Starting pre-push tasks]'",
+            "echo '[🤖 Running SwiftLint]'",
+            "./lint_staged_swift_file.sh;" ,
+            "echo '[🤖 Pre-push tasks complete]'",
+        ],
+    ],
+]).write()
 #endif
+
+//  "echo '[🤖 Adding changes to commit]'",
+//  "xcrun agvtool next-version -all",
+//  "echo '[🤖 Pre-commit tasks complete]'",

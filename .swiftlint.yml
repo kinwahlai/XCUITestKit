@@ -14,14 +14,13 @@ excluded:
   - "**/Pods"
 
 weak_delegate: warning
+unowned_variable_capture: error
+fatal_error_message: warning
 
 type_name:
   min_length: 1
   max_length: 60
   allowed_symbols: ['_']
-
-unowned_variable_capture: warning #i think should change to error
-fatal_error_message: warning #i think should change to error
 
 identifier_name:
   min_length: 1
