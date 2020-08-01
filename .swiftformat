@@ -1,0 +1,17 @@
+
+# file options
+
+--exclude **/Pods, **/*.grpc.swift, **/*.pb.swift, **/Package.swift
+
+# swiftformat config from airbnb
+# format options
+--swiftversion 5
+--self remove # redundantSelf
+--importgrouping testable-bottom # sortedImports
+--commas always # trailingCommas
+--trimwhitespace always # trailingSpace
+--indent 2
+
+
+# rules
+--rules redundantParens,redundantSelf,sortedImports,trailingCommas,trailingSpace,semicolons,spaceAroundBraces

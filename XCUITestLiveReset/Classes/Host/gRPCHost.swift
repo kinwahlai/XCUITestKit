@@ -9,6 +9,7 @@ import Foundation
 import NIO
 import GRPC
 
+// swiftlint:disable:next type_name
 class gRPCHost {
     private let group: EventLoopGroup = PlatformSupport.makeEventLoopGroup(loopCount: 1)
     @DelayedMutable

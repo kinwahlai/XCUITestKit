@@ -11,13 +11,14 @@ import Foundation
 import GRPC
 import NIO
 
+// swiftlint:disable:next type_name
 enum gRPCOperationError: Error {
     case resetFailed(Error)
     case configureFailed(Error)
     case connectionLost(Error)
 }
 
-// swiftlint:disable:next
+// swiftlint:disable:next type_name
 class gRPCCLient {
     private let client: XCUITestKit_LiveResetClient
     

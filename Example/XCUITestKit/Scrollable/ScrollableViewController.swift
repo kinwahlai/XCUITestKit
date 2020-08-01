@@ -11,7 +11,9 @@ import UIKit
 class ScrollableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
+    // swiftlint:disable:next weak_delegate
     let tableviewSourceDelegate = TableViewDataSourceDelegate()
+    // swiftlint:disable:next weak_delegate
     let collectionviewSourceDelegate = CollectionViewDataSourceDelegate()
     
     override func viewDidLoad() {
