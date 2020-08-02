@@ -48,3 +48,18 @@ extension ValueTypes {
         return output
     }
 }
+
+extension ValueTypes: CustomStringConvertible {
+    public var description: String {
+        switch self {
+            case .boolValue(let b):
+                return "\(b)"
+            case .doubleValue(let d):
+                return "\(d)"
+            case .intValue(let i):
+                return "\(i)"
+            case .stringValue(let s):
+                return "\(s)"
+        }
+    }
+}

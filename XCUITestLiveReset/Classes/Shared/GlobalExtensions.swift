@@ -70,4 +70,10 @@ public struct DescriptionBuilder {
     static func buildBlock(_ parts: String...) -> String {
         parts.joined(separator: "\n")
     }
+    static func buildExpression(_ expression: @autoclosure () -> String) -> String {
+        expression()
+    }
+    static func buildExpression(_ expression: [String]) -> String {
+        expression.joined(separator: "\n")
+    }
 }

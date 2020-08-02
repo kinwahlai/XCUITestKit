@@ -21,16 +21,6 @@ public struct ServiceSettings {
     }
 }
 
-extension ServiceSettings: CustomStringConvertible, CustomDebugStringConvertible {
-    public var description: String {
-        contents.description
-    }
-
-    public var debugDescription: String {
-        contents.debugDescription
-    }
-}
-
 extension ServiceSettings: Collection {
     public typealias Index = DictionaryType.Index
     public typealias Element = DictionaryType.Element
@@ -107,5 +97,15 @@ extension ServiceSettings {
 
     public func transform() -> [String: XCUITestKit_OneOf] {
         contents.reduce([:]) { [$1.key: $1.value.covert()] }
+    }
+}
+
+extension ServiceSettings: CustomDebugStringConvertible {
+
+    @DescriptionBuilder public var debugDescription: String {
+        "ServiceSettings:"
+        "==================="
+        contents.debugDescription
+        "==================="
     }
 }
