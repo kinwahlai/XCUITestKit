@@ -12,10 +12,23 @@ import NIO
 
 public enum LiveResetHostError: Error {
     case serverFailedToStart
+    case liveResetModuleNotAvailble
+    case failedToResolvePort
+
+    public var localizedDescription: String {
+        switch self {
+            case .liveResetModuleNotAvailble:
+                return "LiveResetHostDelegate must be set before calling start(), please configure with +[LiveResetHost set]"
+            case .serverFailedToStart:
+                return "gRPC server failed to start"
+            case .failedToResolvePort:
+                return "Failed to resolve port with the NetServiceName, please verify the NetServiceName"
+        }
+    }
 }
 
 // implement by class that replace the RootViewController and UIWindow, either AppDelegate, SceneDelegate
-public protocol LiveResetHostDelegate: class {
+public protocol LiveResetHostDelegate: AnyObject {
     func didReceiveReset()
 }
 
@@ -55,8 +68,6 @@ public class LiveResetHost {
         _netServiceHost.set { [unowned self] () -> NetServiceHost in
             NetServiceHost(name: self.netServiceName)
         }
-
-
     }
 
     deinit {
@@ -68,16 +79,21 @@ public class LiveResetHost {
         }
     }
 
-    public func shutdown(_ error: Error? = nil) {
-        print(error.debugDescription)
-    }
-
-    public func start() {
-        guard netServiceBroadcasted == false && port == 0 else {
-            return
+    @discardableResult
+    public func startIfAvailable() -> Result<Int, LiveResetHostError> {
+        guard LiveResetHost.isAvailable else {
+            return .failure(.liveResetModuleNotAvailble)
+        }
+        guard netServiceBroadcasted == false, port == 0 else {
+            return .success(port)
         }
         broadcast(timeout: defaultTimeout)
-        waitForServerReady()
+        return waitForServerReady()
+    }
+
+    public func set<T>(_ keyPath: ReferenceWritableKeyPath<LiveResetHost, T>, _ value: T) -> Self {
+        self[keyPath: keyPath] = value
+        return self
     }
 
     private func broadcast(timeout: Double) {
@@ -102,18 +118,17 @@ public class LiveResetHost {
         grpcHost.acceptRequest()
     }
 
-    private func waitForServerReady() {
+    private func waitForServerReady() -> Result<Int, LiveResetHostError> {
         for _ in 0..<Int(defaultTimeout) {
             if netServiceBroadcasted, grpcHost.isServerStarted {
-                return
+                return .success(port)
             }
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 1.0))
         }
         // host is not ready, it is a fatal error
-        shutdown(LiveResetHostError.serverFailedToStart)
+        return .failure(.serverFailedToStart)
     }
 }
-
 
 extension LiveResetHost: CallHandlerForwarder {
     func didReceiveReset() {

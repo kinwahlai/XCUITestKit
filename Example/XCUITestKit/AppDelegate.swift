@@ -11,18 +11,18 @@ import XCUITestLiveReset
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        if LiveResetHost.isAvailable {
-            LiveResetHost.shared.delegate = self
-            LiveResetHost.shared.start()
+        if case .success(let port) = LiveResetHost.shared
+            .set(\.delegate, self)
+            .startIfAvailable() {
+            print("Live reset host started on port \(port)")
             reset()
         } else {
-            reset()
+            return false
         }
+
         return true
     }
 
@@ -47,8 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 
 extension AppDelegate: LiveResetHostDelegate {
@@ -62,7 +60,7 @@ extension AppDelegate {
     func reset() {
         tearDown()
 
-//        Make and create AppDependencies if needed
+        //        Make and create AppDependencies if needed
 
         if #available(iOS 13.0, *) {
             window = injectNewRootViewController(to: createWindow(withScene: nil))
