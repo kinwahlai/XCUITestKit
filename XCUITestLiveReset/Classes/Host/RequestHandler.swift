@@ -1,5 +1,5 @@
 //
-//  LiveResetProvider.swift
+//  RequestHandler.swift
 //  XCUITestLiveReset-Base-Host
 //
 //  Created by Darren Lai on 7/26/20.
@@ -9,20 +9,20 @@ import Foundation
 import GRPC
 import NIO
 
-protocol CallHandlerForwarder: AnyObject {
+protocol RequestHandlerForwarder: AnyObject {
     func didReceiveReset()
     func didReceiveSettings(_ setttings: ServiceSettings)
 }
 
-class LiveResetProvider {
-    weak var delegate: CallHandlerForwarder?
+class RequestHandler {
+    weak var delegate: RequestHandlerForwarder?
 
-    init(delegate: CallHandlerForwarder) {
+    init(delegate: RequestHandlerForwarder) {
         self.delegate = delegate
     }
 }
 
-extension LiveResetProvider: XCUITestKit_LiveResetProvider {
+extension RequestHandler: XCUITestKit_LiveResetProvider {
     func heartbeat(request: XCUITestKit_Echo, context: StatusOnlyCallContext) -> EventLoopFuture<XCUITestKit_Echo> {
         print("heartbeat check received -> \(request.message)")
         let response = XCUITestKit_Echo.with { $0.message = request.message }

@@ -49,7 +49,7 @@ public class LiveResetHost {
 
     public private(set) var netServiceName: String = "defaultName"
 
-    internal var netServiceBroadcasted: Bool = false
+    private var netServiceBroadcasted: Bool = false
 
     private var settingsPromise: EventLoopPromise<ServiceSettings>
     public var serviceSettings: EventLoopFuture<ServiceSettings> {
@@ -63,7 +63,7 @@ public class LiveResetHost {
             netServiceName = bonjourName
         }
         _grpcHost.set { [unowned self] () -> gRPCHost in
-            gRPCHost(port: self.port, callHandler: LiveResetProvider(delegate: self), group: self.group)
+            gRPCHost(port: self.port, callHandler: RequestHandler(delegate: self), group: self.group)
         }
         _netServiceHost.set { [unowned self] () -> NetServiceHost in
             NetServiceHost(name: self.netServiceName)
@@ -130,7 +130,7 @@ public class LiveResetHost {
     }
 }
 
-extension LiveResetHost: CallHandlerForwarder {
+extension LiveResetHost: RequestHandlerForwarder {
     func didReceiveReset() {
         delegate?.didReceiveReset()
     }
