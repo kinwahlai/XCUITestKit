@@ -151,15 +151,15 @@ extension XCUITestKit_Ack: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.message)
+      case 1: try decoder.decodeSingularStringField(value: &message)
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.message.isEmpty {
-      try visitor.visitSingularStringField(value: self.message, fieldNumber: 1)
+    if !message.isEmpty {
+      try visitor.visitSingularStringField(value: message, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -199,15 +199,15 @@ extension XCUITestKit_Settings: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,XCUITestKit_OneOf>.self, value: &self.setting)
+      case 1: try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,XCUITestKit_OneOf>.self, value: &setting)
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.setting.isEmpty {
-      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,XCUITestKit_OneOf>.self, value: self.setting, fieldNumber: 1)
+    if !setting.isEmpty {
+      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,XCUITestKit_OneOf>.self, value: setting, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -222,50 +222,50 @@ extension XCUITestKit_Settings: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 extension XCUITestKit_OneOf: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".OneOf"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    2: .same(proto: "stringValue"),
-    3: .same(proto: "boolValue"),
-    4: .same(proto: "doubleValue"),
-    5: .same(proto: "intValue"),
+    1: .same(proto: "stringValue"),
+    2: .same(proto: "boolValue"),
+    3: .same(proto: "doubleValue"),
+    4: .same(proto: "intValue"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 2:
-        if self.types != nil {try decoder.handleConflictingOneOf()}
+      case 1:
+        if types != nil {try decoder.handleConflictingOneOf()}
         var v: String?
         try decoder.decodeSingularStringField(value: &v)
-        if let v = v {self.types = .stringValue(v)}
-      case 3:
-        if self.types != nil {try decoder.handleConflictingOneOf()}
+        if let v = v {types = .stringValue(v)}
+      case 2:
+        if types != nil {try decoder.handleConflictingOneOf()}
         var v: Bool?
         try decoder.decodeSingularBoolField(value: &v)
-        if let v = v {self.types = .boolValue(v)}
-      case 4:
-        if self.types != nil {try decoder.handleConflictingOneOf()}
+        if let v = v {types = .boolValue(v)}
+      case 3:
+        if types != nil {try decoder.handleConflictingOneOf()}
         var v: Double?
         try decoder.decodeSingularDoubleField(value: &v)
-        if let v = v {self.types = .doubleValue(v)}
-      case 5:
-        if self.types != nil {try decoder.handleConflictingOneOf()}
+        if let v = v {types = .doubleValue(v)}
+      case 4:
+        if types != nil {try decoder.handleConflictingOneOf()}
         var v: Int32?
         try decoder.decodeSingularInt32Field(value: &v)
-        if let v = v {self.types = .intValue(v)}
+        if let v = v {types = .intValue(v)}
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    switch self.types {
+    switch types {
     case .stringValue(let v)?:
-      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     case .boolValue(let v)?:
-      try visitor.visitSingularBoolField(value: v, fieldNumber: 3)
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 2)
     case .doubleValue(let v)?:
-      try visitor.visitSingularDoubleField(value: v, fieldNumber: 4)
+      try visitor.visitSingularDoubleField(value: v, fieldNumber: 3)
     case .intValue(let v)?:
-      try visitor.visitSingularInt32Field(value: v, fieldNumber: 5)
+      try visitor.visitSingularInt32Field(value: v, fieldNumber: 4)
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -287,15 +287,15 @@ extension XCUITestKit_Echo: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.message)
+      case 1: try decoder.decodeSingularStringField(value: &message)
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.message.isEmpty {
-      try visitor.visitSingularStringField(value: self.message, fieldNumber: 1)
+    if !message.isEmpty {
+      try visitor.visitSingularStringField(value: message, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }

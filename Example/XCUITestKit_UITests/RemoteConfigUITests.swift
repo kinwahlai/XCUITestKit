@@ -18,6 +18,8 @@ class RemoteConfigUITests: XCTestCase {
             $0.app = app
             $0.delegate = self
         }.resetOrLaunch()
+        let settings: ServiceSettings = ["test_name": .stringValue("\(#file.lastPathComponent)"), "mock_server_port": .intValue(1234), "persist": .boolValue(false)]
+        LiveResetClient.shared.configure(settings: settings)
     }
 
     override func tearDownWithError() throws {

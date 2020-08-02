@@ -31,10 +31,10 @@ message Settings {
 
 message OneOf {
     oneof types {
-        string stringValue = 2;
-        bool boolValue = 3;
-        double doubleValue = 4;
-        int32 intValue = 5;
+        string stringValue = 1;
+        bool boolValue = 2;
+        double doubleValue = 3;
+        int32 intValue = 4;
     }
 }
 

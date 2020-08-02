@@ -54,15 +54,10 @@ public final class XCUITestKit_LiveResetClient: GRPCClient, XCUITestKit_LiveRese
   ///   - request: Request to send to Heartbeat.
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  public func heartbeat(
-    _ request: XCUITestKit_Echo,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<XCUITestKit_Echo, XCUITestKit_Echo> {
-    return self.makeUnaryCall(
-      path: "/XCUITestKit.LiveReset/Heartbeat",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions
-    )
+  public func heartbeat(_ request: XCUITestKit_Echo, callOptions: CallOptions? = nil) -> UnaryCall<XCUITestKit_Echo, XCUITestKit_Echo> {
+    return makeUnaryCall(path: "/XCUITestKit.LiveReset/Heartbeat",
+                              request: request,
+                              callOptions: callOptions ?? defaultCallOptions)
   }
 
   /// Unary call to Reset
@@ -71,15 +66,10 @@ public final class XCUITestKit_LiveResetClient: GRPCClient, XCUITestKit_LiveRese
   ///   - request: Request to send to Reset.
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  public func reset(
-    _ request: XCUITestKit_Empty,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<XCUITestKit_Empty, XCUITestKit_Ack> {
-    return self.makeUnaryCall(
-      path: "/XCUITestKit.LiveReset/Reset",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions
-    )
+  public func reset(_ request: XCUITestKit_Empty, callOptions: CallOptions? = nil) -> UnaryCall<XCUITestKit_Empty, XCUITestKit_Ack> {
+    return makeUnaryCall(path: "/XCUITestKit.LiveReset/Reset",
+                              request: request,
+                              callOptions: callOptions ?? defaultCallOptions)
   }
 
   /// Unary call to Configure
@@ -88,16 +78,12 @@ public final class XCUITestKit_LiveResetClient: GRPCClient, XCUITestKit_LiveRese
   ///   - request: Request to send to Configure.
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  public func configure(
-    _ request: XCUITestKit_Settings,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<XCUITestKit_Settings, XCUITestKit_Ack> {
-    return self.makeUnaryCall(
-      path: "/XCUITestKit.LiveReset/Configure",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions
-    )
+  public func configure(_ request: XCUITestKit_Settings, callOptions: CallOptions? = nil) -> UnaryCall<XCUITestKit_Settings, XCUITestKit_Ack> {
+    return makeUnaryCall(path: "/XCUITestKit.LiveReset/Configure",
+                              request: request,
+                              callOptions: callOptions ?? defaultCallOptions)
   }
+
 }
 
 /// To build a server, implement a class that conforms to this protocol.

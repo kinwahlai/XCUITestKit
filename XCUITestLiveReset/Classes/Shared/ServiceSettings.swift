@@ -96,7 +96,7 @@ extension ServiceSettings {
     }
 
     public func transform() -> [String: XCUITestKit_OneOf] {
-        contents.reduce([:]) { [$1.key: $1.value.covert()] }
+        contents.mapValues({ $0.convert() })
     }
 }
 

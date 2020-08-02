@@ -33,7 +33,7 @@ extension ValueTypes {
 }
 
 extension ValueTypes {
-    func covert() -> XCUITestKit_OneOf {
+    func convert() -> XCUITestKit_OneOf {
         var output: XCUITestKit_OneOf = XCUITestKit_OneOf()
         switch self {
             case .boolValue(let b):
