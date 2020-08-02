@@ -51,7 +51,5 @@ class ThirtyDayCell: UITableViewCell {
         dayLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
         dayLabel.centerYAnchor.constraint(equalTo: cellView.centerYAnchor).isActive = true
         dayLabel.leftAnchor.constraint(equalTo: cellView.leftAnchor, constant: 20).isActive = true
-
     }
-
 }

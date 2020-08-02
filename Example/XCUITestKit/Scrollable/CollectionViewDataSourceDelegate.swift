@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewDataSourceDelegate: NSObject, UICollectionViewDelegate,  UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class CollectionViewDataSourceDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     var cellColor = true
     var reuseIdentifier = "Cell"

@@ -8,7 +8,7 @@
 
 import Foundation
 
-final public class NetServiceHost: NSObject {
+public final class NetServiceHost: NSObject {
     private let _service: NetService
     var completion: NetServiceCompletion?
 
@@ -37,9 +37,8 @@ extension NetServiceHost: NetServiceDelegate {
     public func netServiceDidPublish(_ sender: NetService) {
         completion?(.success(sender.port))
     }
+
     public func netService(_ sender: NetService, didNotPublish errorDict: [String: NSNumber]) {
         completion?(.failure(.notPublish(errorDict)))
     }
 }
-
-

@@ -14,8 +14,7 @@ class VerifyEmailUITests: TestBaseWithLiveReset {
         try super.setUpWithError()
     }
 
-    override func tearDownWithError() throws {
-    }
+    override func tearDownWithError() throws {}
 
     func testYouAreAppEntryScreen() throws {
         let app = XCUIApplication()

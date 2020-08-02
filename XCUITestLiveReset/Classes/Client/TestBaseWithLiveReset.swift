@@ -31,7 +31,7 @@ open class TestBaseWithLiveReset: XCTestCase {
     // or let handle it via share() function
     //  try super.setUpWithError()
 
-    open override func setUpWithError() throws {
+    override open func setUpWithError() throws {
         continueAfterFailure = false
         let app = XCUIApplication()
         LiveResetClient.with {

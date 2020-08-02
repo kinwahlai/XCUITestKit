@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewDataSourceDelegate: NSObject, UITableViewDelegate,  UITableViewDataSource {
+class TableViewDataSourceDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
     func registerCell(with tableView: UITableView) {
         tableView.register(ThirtyDayCell.self, forCellReuseIdentifier: "cellId")
     }
@@ -29,4 +29,3 @@ class TableViewDataSourceDelegate: NSObject, UITableViewDelegate,  UITableViewDa
         return 100
     }
 }
-

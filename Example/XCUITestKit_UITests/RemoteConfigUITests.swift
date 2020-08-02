@@ -10,7 +10,6 @@ import XCTest
 import XCUITestLiveReset
 
 class RemoteConfigUITests: TestBaseWithLiveReset {
-
     override func setUpWithError() throws {
         try super.setUpWithError()
 
@@ -18,8 +17,7 @@ class RemoteConfigUITests: TestBaseWithLiveReset {
         LiveResetClient.shared.configure(settings: settings)
     }
 
-    override func tearDownWithError() throws {
-    }
+    override func tearDownWithError() throws {}
 
     func testShowSettingsSentInSetup() throws {
         let expected = """
@@ -58,5 +56,4 @@ test_case: -[RemoteConfigUITests testShowSettingsSentInSetup]
 //
 //        XCTAssertEqual(app.textViews["configView"].value as! String, expected)
 //    }
-
 }

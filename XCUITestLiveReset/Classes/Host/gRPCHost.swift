@@ -27,8 +27,7 @@ class gRPCHost {
         shutdown()
     }
 
-    func shutdown() {
-    }
+    func shutdown() {}
 
     func acceptRequest() {
         server.map {

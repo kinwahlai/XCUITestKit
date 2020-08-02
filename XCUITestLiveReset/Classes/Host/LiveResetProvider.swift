@@ -9,7 +9,7 @@ import Foundation
 import GRPC
 import NIO
 
-protocol CallHandlerForwarder: class {
+protocol CallHandlerForwarder: AnyObject {
     func didReceiveReset()
     func didReceiveSettings(_ setttings: ServiceSettings)
 }

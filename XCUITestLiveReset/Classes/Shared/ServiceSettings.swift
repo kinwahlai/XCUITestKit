@@ -9,7 +9,6 @@
 import Foundation
 
 public struct ServiceSettings {
-
     public typealias DictionaryType = [String: ValueTypes]
 
     private var contents = DictionaryType()
@@ -41,34 +40,34 @@ extension ServiceSettings: Collection {
 extension ServiceSettings {
     subscript(key: String) -> String {
         get {
-            if case .stringValue(let v)? = contents[key] {return v}
+            if case .stringValue(let v)? = contents[key] { return v }
             return String()
         }
-        set { contents[key] = .stringValue(newValue)}
+        set { contents[key] = .stringValue(newValue) }
     }
 
     subscript(key: String) -> Int {
         get {
-            if case .intValue(let v)? = contents[key] {return v}
+            if case .intValue(let v)? = contents[key] { return v }
             return 0
         }
-        set { contents[key] = .intValue(newValue)}
+        set { contents[key] = .intValue(newValue) }
     }
 
     subscript(key: String) -> Double {
         get {
-            if case .doubleValue(let v)? = contents[key] {return v}
+            if case .doubleValue(let v)? = contents[key] { return v }
             return 0
         }
-        set { contents[key] = .doubleValue(newValue)}
+        set { contents[key] = .doubleValue(newValue) }
     }
 
     subscript(key: String) -> Bool {
         get {
-            if case .boolValue(let v)? = contents[key] {return v}
+            if case .boolValue(let v)? = contents[key] { return v }
             return false
         }
-        set { contents[key] = .boolValue(newValue)}
+        set { contents[key] = .boolValue(newValue) }
     }
 }
 

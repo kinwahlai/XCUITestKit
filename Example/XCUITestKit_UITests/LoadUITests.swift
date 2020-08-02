@@ -16,13 +16,11 @@ func assertgRPCServerStarted() {
 }
 
 class LoadUITests: TestBaseWithLiveReset {
-
     override func setUpWithError() throws {
         try super.setUpWithError()
     }
 
-    override func tearDownWithError() throws {
-    }
+    override func tearDownWithError() throws {}
 
     func actualTestFunction() throws {
         let app = XCUIApplication()

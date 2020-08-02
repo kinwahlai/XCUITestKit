@@ -8,7 +8,6 @@
 import Foundation
 import NIO
 
-
 extension EventLoopFuture {
     public func whenSuccess(queue: DispatchQueue, _ callback: @escaping (Value) -> Void) {
         whenSuccess { v in

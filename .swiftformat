@@ -14,4 +14,31 @@
 
 
 # rules
---rules redundantParens,redundantSelf,sortedImports,trailingCommas,trailingSpace,semicolons,spaceAroundBraces
+--rules redundantParens
+--rules redundantSelf
+--rules sortedImports
+--rules trailingCommas
+--rules trailingSpace
+--rules semicolons
+--rules spaceAroundBraces
+--rules andOperator
+--rules anyObjectProtocol
+--rules blankLinesAroundMark
+--rules blankLinesAtEndOfScope
+--rules blankLinesAtStartOfScope
+--rules blankLinesBetweenScopes
+--rules consecutiveBlankLines
+--rules consecutiveSpaces
+--rules duplicateImports
+--rules elseOnSameLine
+--rules emptyBraces
+--rules modifierOrder
+--rules preferKeyPath
+--rules redundantInit
+--rules redundantLetError
+--rules redundantReturn
+--rules redundantVoidReturnType
+--rules spaceAroundBrackets
+--rules spaceAroundComments
+--rules spaceInsideBraces
+--rules todos

@@ -67,4 +67,3 @@ class UIControlsViewController: UIViewController {
         emailFieldError.isHidden = true
     }
 }
-

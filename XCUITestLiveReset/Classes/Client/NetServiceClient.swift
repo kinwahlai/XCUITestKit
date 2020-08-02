@@ -37,6 +37,7 @@ extension NetServiceClient: NetServiceDelegate {
     func netServiceDidResolveAddress(_ sender: NetService) {
         completion?(.success(sender.port))
     }
+
     func netService(_ sender: NetService, didNotResolve errorDict: [String: NSNumber]) {
         completion?(.failure(.notResolve(errorDict)))
     }

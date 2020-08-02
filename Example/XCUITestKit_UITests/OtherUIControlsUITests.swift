@@ -10,13 +10,11 @@ import XCTest
 import XCUITestLiveReset
 
 class OtherUIControlsUITests: TestBaseWithLiveReset {
-
     override func setUpWithError() throws {
         try super.setUpWithError()
     }
 
-    override func tearDownWithError() throws {
-    }
+    override func tearDownWithError() throws {}
 
     func testDelayedLabelShowsAfterFewseconds() throws {
         let app = XCUIApplication()

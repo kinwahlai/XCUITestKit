@@ -12,7 +12,7 @@ import GRPC
 import NIO
 import XCTest
 
-public protocol LiveResetClientDelegate: class {
+public protocol LiveResetClientDelegate: AnyObject {
     func clientShutdown(withFatalError error: Error)
     func clientOperationFailed(withError error: Error)
 }
@@ -47,7 +47,7 @@ public class LiveResetClient {
 
     internal init() {
         _netServiceName.set {
-            String.init(format: "\(SharedKey.NetServicePrefix).%d.%.0f",  ProcessInfo.processInfo.processIdentifier, Date().timeIntervalSince1970 * 100_000)
+            String(format: "\(SharedKey.NetServicePrefix).%d.%.0f", ProcessInfo.processInfo.processIdentifier, Date().timeIntervalSince1970 * 100_000)
         }
         _netServiceClient.set { [unowned self] in
             NetServiceClient(name: self.netServiceName)
@@ -99,7 +99,7 @@ public class LiveResetClient {
     func configureInstance(withConfiguration config: LiveResetClientConfiguration) {
         if !sharedInstanceConfigured || config.reconfigureSharedInstance {
             config.app.launchArguments.append(contentsOf: config.launchArguments)
-            config.launchEnvironment.forEach({ config.app.launchEnvironment[$0] =  $1 })
+            config.launchEnvironment.forEach({ config.app.launchEnvironment[$0] = $1 })
             config.app.launchEnvironment[SharedKey.LiveResetVersion] = LIVE_RESET_VERSION
             config.app.launchEnvironment[SharedKey.NetServiceName] = netServiceName
             app = config.app
@@ -148,6 +148,7 @@ public class LiveResetClient {
     }
 
     // MARK: - Client Operations
+
     public func configure(settings: ServiceSettings) {
         precondition(netServiceResolved == true, "NetService resolve must be called first")
         switch grpcClient.configure(settings: settings) {

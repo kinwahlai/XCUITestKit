@@ -66,5 +66,4 @@ extension ValueTypes: CustomStringConvertible, CustomDebugStringConvertible {
                 return "\(s)"
         }
     }
-
 }
