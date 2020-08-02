@@ -52,31 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: LiveResetHostDelegate {
-
     func didReceiveReset() {
         reset()
-    }
-
-    func didReceiveSettings(_ setttings: ServiceSettings) {
-        print("received settings")
-    }
-
-
-    @available(iOS 13.0, *)
-    @discardableResult
-    func replaceWindow(_ windowScene: UIWindowScene? = nil) -> UIWindow {
-        let main = UIStoryboard(name: "Main", bundle: nil)
-        main.instantiateInitialViewController()
-        let window: UIWindow
-        if let scene = windowScene {
-            window = UIWindow(frame: scene.coordinateSpace.bounds)
-            window.windowScene = scene
-        } else {
-            window = UIWindow(frame: UIScreen.main.bounds)
-        }
-        window.rootViewController = main.instantiateInitialViewController()
-        window.makeKeyAndVisible()
-        return window
     }
 }
 

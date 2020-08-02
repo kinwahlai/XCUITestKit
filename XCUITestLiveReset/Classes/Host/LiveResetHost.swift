@@ -14,16 +14,15 @@ public enum LiveResetHostError: Error {
     case serverFailedToStart
 }
 
-public protocol LiveResetHostDelegate: class { // implement by class that will handle the reset
+// implement by class that replace the RootViewController and UIWindow, either AppDelegate, SceneDelegate
+public protocol LiveResetHostDelegate: class {
     func didReceiveReset()
-    func didReceiveSettings(_ setttings: ServiceSettings)
 }
 
 public class LiveResetHost {
     private let group: EventLoopGroup
     public var defaultTimeout: Double = 10.0
     public weak var delegate: LiveResetHostDelegate?
-    public private(set) var remoteSettings: ServiceSettings = ServiceSettings()
     public private(set) var port: Int = 0
 
     @DelayedMutable
@@ -39,9 +38,14 @@ public class LiveResetHost {
 
     internal var netServiceBroadcasted: Bool = false
 
+    private var settingsPromise: EventLoopPromise<ServiceSettings>
+    public var serviceSettings: EventLoopFuture<ServiceSettings> {
+        settingsPromise.futureResult
+    }
+
     private init() {
         group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-
+        settingsPromise = group.next().makePromise()
         if let bonjourName = ProcessInfo.processInfo.environment[SharedKey.NetServiceName] {
             netServiceName = bonjourName
         }
@@ -117,7 +121,7 @@ extension LiveResetHost: CallHandlerForwarder {
     }
 
     func didReceiveSettings(_ setttings: ServiceSettings) {
-        delegate?.didReceiveSettings(setttings)
+        settingsPromise.succeed(setttings)
     }
 }
 

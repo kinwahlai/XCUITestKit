@@ -18,20 +18,49 @@ class RemoteConfigUITests: XCTestCase {
             $0.app = app
             $0.delegate = self
         }.resetOrLaunch()
-        let settings: ServiceSettings = ["test_name": .stringValue("\(#file.lastPathComponent)"), "mock_server_port": .intValue(1234), "persist": .boolValue(false)]
+        let settings: ServiceSettings = ["mock_server_port": .intValue(1234), "persist": .boolValue(false), "test_case": .stringValue("\(name)")]
         LiveResetClient.shared.configure(settings: settings)
     }
 
     override func tearDownWithError() throws {
     }
 
-    func testExample() throws {
+    func testShowSettingsSentInSetup() throws {
+        let expected = """
+ServiceSettings:
+===================
+mock_server_port: 1234
+persist: false
+test_case: -[RemoteConfigUITests testShowSettingsSentInSetup]
+===================
+"""
         let app = XCUIApplication()
         XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
         app.tables.staticTexts["btn_testUIControls"].tap()
         app.navigationBars["UI Controls"].buttons["More"].tap()
 
-        XCTAssertEqual(app.textViews["configView"].value as! String, "aaa")
+        XCTAssertEqual(app.textViews["configView"].value as! String, expected)
     }
+
+//    func testNewSettingsAppendToCurrent() throws {
+//
+//        LiveResetClient.shared.configure(settings: ["some_key": .intValue(778877)])
+//
+//        let expected = """
+//ServiceSettings:
+//===================
+//mock_server_port: 1234
+//persist: false
+//some_key: 778877
+//test_case: -[RemoteConfigUITests testExample]
+//===================
+//"""
+//        let app = XCUIApplication()
+//        XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
+//        app.tables.staticTexts["btn_testUIControls"].tap()
+//        app.navigationBars["UI Controls"].buttons["More"].tap()
+//
+//        XCTAssertEqual(app.textViews["configView"].value as! String, expected)
+//    }
 
 }

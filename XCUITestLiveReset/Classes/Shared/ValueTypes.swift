@@ -49,7 +49,11 @@ extension ValueTypes {
     }
 }
 
-extension ValueTypes: CustomStringConvertible {
+extension ValueTypes: CustomStringConvertible, CustomDebugStringConvertible {
+    public var debugDescription: String {
+        description
+    }
+
     public var description: String {
         switch self {
             case .boolValue(let b):
@@ -62,4 +66,5 @@ extension ValueTypes: CustomStringConvertible {
                 return "\(s)"
         }
     }
+
 }

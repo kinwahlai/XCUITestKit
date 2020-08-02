@@ -15,7 +15,10 @@ class RemoteConfigViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configView.text = "aaa"
+        LiveResetHost.shared.serviceSettings
+            .whenSuccess(queue: DispatchQueue.main) { [weak self] settings in
+                self?.configView.text = settings.debugDescription
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
