@@ -9,15 +9,11 @@
 import XCTest
 import XCUITestLiveReset
 
-class RemoteConfigUITests: XCTestCase {
+class RemoteConfigUITests: TestBaseWithLiveReset {
 
     override func setUpWithError() throws {
-        continueAfterFailure = false
-        let app = XCUIApplication()
-        LiveResetClient.with {
-            $0.app = app
-            $0.delegate = self
-        }.resetOrLaunch()
+        try super.setUpWithError()
+
         let settings: ServiceSettings = ["mock_server_port": .intValue(1234), "persist": .boolValue(false), "test_case": .stringValue("\(name)")]
         LiveResetClient.shared.configure(settings: settings)
     }

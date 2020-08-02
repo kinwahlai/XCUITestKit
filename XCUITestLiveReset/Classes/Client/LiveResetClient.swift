@@ -24,7 +24,7 @@ public enum LiveResetClientError: Error {
 public class LiveResetClient {
     // configurable values
     public weak var delegate: LiveResetClientDelegate?
-    public weak var app: XCUIApplication!
+    public var app: XCUIApplication?
     public var defaultTimeout: Double = 10.0
 
     @DelayedMutable
@@ -45,7 +45,7 @@ public class LiveResetClient {
     public private(set) var port: Int = 0
     private let group: EventLoopGroup = PlatformSupport.makeEventLoopGroup(loopCount: 1)
 
-    private init() {
+    internal init() {
         _netServiceName.set {
             String.init(format: "\(SharedKey.NetServicePrefix).%d.%.0f",  ProcessInfo.processInfo.processIdentifier, Date().timeIntervalSince1970 * 100_000)
         }
@@ -85,10 +85,10 @@ public class LiveResetClient {
     }
 
     public func resetOrLaunch() {
-        precondition(delegate != nil, "Delegate must be there to accept ready to launch call")
+        precondition(app != nil, "XCUIApplication must be set before calling resetOrLaunch(), please configure with +[LiveResetClient with]")
         if netServiceResolved == false {
             resolve(timeout: defaultTimeout)
-            app.launch()
+            app?.launch()
             waitForHostReady()
         } else {
             waitForHostReady()

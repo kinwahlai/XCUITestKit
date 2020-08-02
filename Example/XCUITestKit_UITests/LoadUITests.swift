@@ -15,16 +15,10 @@ func assertgRPCServerStarted() {
     XCTAssertTrue(app.staticTexts["\(LiveResetClient.shared.netServiceName)"].exists)
 }
 
-class LoadUITests: XCTestCase {
+class LoadUITests: TestBaseWithLiveReset {
 
     override func setUpWithError() throws {
-        continueAfterFailure = false
-        let app = XCUIApplication()
-//        app.launch() // uncomment this line and comment the LiveResetClient to compare the speed
-        LiveResetClient.with {
-            $0.app = app
-            $0.delegate = self
-        }.resetOrLaunch()
+        try super.setUpWithError()
     }
 
     override func tearDownWithError() throws {

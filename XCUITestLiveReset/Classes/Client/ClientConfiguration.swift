@@ -17,12 +17,27 @@ public struct LiveResetClientConfiguration {
     public var launchEnvironment: [String: String] = [:]
 }
 
-extension LiveResetClient {
-    public static func with(_ populator: (inout LiveResetClientConfiguration) -> Void) -> LiveResetClient {
-        var config = LiveResetClientConfiguration()
-        populator(&config)
+public struct LiveResetClientBuilder {
+    let config: LiveResetClientConfiguration
+
+    public func build() -> LiveResetClient {
+        var instance = LiveResetClient()
+        instance.configureInstance(withConfiguration: config)
+        return instance
+    }
+
+    @discardableResult
+    public func share() -> LiveResetClient {
         let instance = LiveResetClient.shared
         instance.configureInstance(withConfiguration: config)
         return instance
+    }
+}
+
+extension LiveResetClient {
+    public static func with(_ populator: (inout LiveResetClientConfiguration) -> Void) -> LiveResetClientBuilder {
+        var config = LiveResetClientConfiguration()
+        populator(&config)
+        return LiveResetClientBuilder(config: config)
     }
 }

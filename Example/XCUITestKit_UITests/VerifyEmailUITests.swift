@@ -9,17 +9,9 @@
 import XCTest
 import XCUITestLiveReset
 
-class VerifyEmailUITests: XCTestCase {
-
+class VerifyEmailUITests: TestBaseWithLiveReset {
     override func setUpWithError() throws {
-        continueAfterFailure = false
-        let app = XCUIApplication()
-//        app.launch()
-        LiveResetClient.with {
-            $0.app = app
-            $0.delegate = self
-            $0.launchEnvironment["custom"] = "value"
-        }.resetOrLaunch()
+        try super.setUpWithError()
     }
 
     override func tearDownWithError() throws {
@@ -96,7 +88,7 @@ extension XCUIElement {
     }
 }
 
-extension XCTest: LiveResetClientDelegate {
+extension VerifyEmailUITests: LiveResetClientDelegate {
     public func clientShutdown(withFatalError error: Error) {
         print("Fatal error - \(error.localizedDescription)")
         XCTFail(error.localizedDescription)

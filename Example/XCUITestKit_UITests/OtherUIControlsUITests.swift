@@ -9,16 +9,10 @@
 import XCTest
 import XCUITestLiveReset
 
-class OtherUIControlsUITests: XCTestCase {
+class OtherUIControlsUITests: TestBaseWithLiveReset {
 
     override func setUpWithError() throws {
-        continueAfterFailure = false
-        let app = XCUIApplication()
-        LiveResetClient.with {
-            $0.app = app
-            $0.delegate = self
-            $0.launchEnvironment["example"] = "value"
-        }.resetOrLaunch()
+        try super.setUpWithError()
     }
 
     override func tearDownWithError() throws {
