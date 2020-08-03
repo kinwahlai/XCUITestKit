@@ -25,7 +25,7 @@ Gather all the utility and tool I built into XCUITestKit
   }
   s.social_media_url = 'https://twitter.com/darrenkwlai'
   s.swift_versions = '5.0'
-  s.ios.deployment_target = '12.0'
+  s.ios.deployment_target = '12.4'
 
   s.source_files = 'XCUITestKit/Classes/**/*'
   

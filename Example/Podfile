@@ -4,7 +4,7 @@ inhibit_all_warnings!
 
 project './XCUITestKit.xcodeproj'
 
-inDevelopment = true
+inDevelopment = false
 target 'XCUITestKit_Example' do
   
   if inDevelopment

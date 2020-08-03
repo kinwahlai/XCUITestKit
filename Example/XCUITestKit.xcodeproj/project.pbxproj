@@ -13,6 +13,10 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		6608A6F124D8B6D60015B1A3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6608A6F024D8B6D60015B1A3 /* main.swift */; };
+		6608A6F324D8B8DD0015B1A3 /* AppDelegateWithScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6608A6F224D8B8DD0015B1A3 /* AppDelegateWithScene.swift */; };
+		6608A6F524D8BAB00015B1A3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6608A6F424D8BAB00015B1A3 /* SceneDelegate.swift */; };
+		6608A6FA24D8C2200015B1A3 /* Info_iOS13.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6608A6F924D8C2200015B1A3 /* Info_iOS13.plist */; };
 		660B631F24D449520097DF74 /* RemoteConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660B631E24D449520097DF74 /* RemoteConfigViewController.swift */; };
 		660B632124D44AF40097DF74 /* RemoteConfigUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660B632024D44AF40097DF74 /* RemoteConfigUITests.swift */; };
 		666CEA9724CEF0A600D1ADEC /* LoadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666CEA9624CEF0A600D1ADEC /* LoadUITests.swift */; };
@@ -47,6 +51,11 @@
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		6608A6F024D8B6D60015B1A3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6608A6F224D8B8DD0015B1A3 /* AppDelegateWithScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateWithScene.swift; sourceTree = "<group>"; };
+		6608A6F424D8BAB00015B1A3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		6608A6F824D8BFF00015B1A3 /* iOSVersionConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iOSVersionConfig.xcconfig; sourceTree = "<group>"; };
+		6608A6F924D8C2200015B1A3 /* Info_iOS13.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info_iOS13.plist; sourceTree = "<group>"; };
 		660B631E24D449520097DF74 /* RemoteConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigViewController.swift; sourceTree = "<group>"; };
 		660B632024D44AF40097DF74 /* RemoteConfigUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigUITests.swift; sourceTree = "<group>"; };
 		666CEA9624CEF0A600D1ADEC /* LoadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUITests.swift; sourceTree = "<group>"; };
@@ -103,6 +112,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				6608A6F824D8BFF00015B1A3 /* iOSVersionConfig.xcconfig */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example */,
 				66CD87F524B492D900FDA672 /* XCUITestKit_UITests */,
@@ -133,6 +143,9 @@
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				66CD880924B4D27800FDA672 /* AppEntryViewController.swift */,
 				660B631E24D449520097DF74 /* RemoteConfigViewController.swift */,
+				6608A6F024D8B6D60015B1A3 /* main.swift */,
+				6608A6F224D8B8DD0015B1A3 /* AppDelegateWithScene.swift */,
+				6608A6F424D8BAB00015B1A3 /* SceneDelegate.swift */,
 			);
 			name = Example;
 			path = XCUITestKit;
@@ -141,6 +154,7 @@
 		607FACD31AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6608A6F924D8C2200015B1A3 /* Info_iOS13.plist */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -281,6 +295,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6608A6FA24D8C2200015B1A3 /* Info_iOS13.plist in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -464,15 +479,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6608A6F324D8B8DD0015B1A3 /* AppDelegateWithScene.swift in Sources */,
 				66CD880424B4BF6200FDA672 /* MonthCollectionCell.swift in Sources */,
 				66CD880A24B4D27800FDA672 /* AppEntryViewController.swift in Sources */,
 				66CD880624B4BF6200FDA672 /* CollectionViewDataSourceDelegate.swift in Sources */,
 				607FACD81AFB9204008FA782 /* UIControlsViewController.swift in Sources */,
 				660B631F24D449520097DF74 /* RemoteConfigViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				6608A6F124D8B6D60015B1A3 /* main.swift in Sources */,
 				66CD880824B4BF6200FDA672 /* TableViewDataSourceDelegate.swift in Sources */,
 				66CD880724B4BF6200FDA672 /* ThirtyDayCell.swift in Sources */,
 				66CD880524B4BF6200FDA672 /* ScrollableViewController.swift in Sources */,
+				6608A6F524D8BAB00015B1A3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +537,7 @@
 /* Begin XCBuildConfiguration section */
 		607FACED1AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6608A6F824D8BFF00015B1A3 /* iOSVersionConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -575,6 +594,7 @@
 		};
 		607FACEE1AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6608A6F824D8BFF00015B1A3 /* iOSVersionConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -629,7 +649,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = XCUITestKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kinwahlai.XCUITestKit-Example";
@@ -647,7 +666,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = XCUITestKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kinwahlai.XCUITestKit-Example";

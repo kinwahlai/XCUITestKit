@@ -24,12 +24,6 @@ public enum LiveResetHostError: Error {
     }
 }
 
-// implement by class that replace the RootViewController and UIWindow, either AppDelegate, SceneDelegate
-public protocol LiveResetHostDelegate: AnyObject {
-    var window: UIWindow? { get set }
-    func didReceiveReset()
-}
-
 public class LiveResetHost {
     private let group: EventLoopGroup
     public var defaultTimeout: Double = 10.0
