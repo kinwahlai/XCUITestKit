@@ -11,14 +11,23 @@ import XCUITestLiveReset
 
 class RemoteConfigViewController: UIViewController {
     @IBOutlet weak var remoteConfigReceived: UILabel!
-    @IBOutlet weak var configView: UITextView!
+    @IBOutlet weak var configView: UILabel!
+
+    private let bag = CollectionBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        LiveResetHost.shared.serviceSettings
-            .whenSuccess(queue: DispatchQueue.main) { [weak self] settings in
-                self?.configView.text = settings.debugDescription
-        }
+
+        bag.addCancellable(
+            LiveResetHost.shared.$currentSessionData.observe(with: { [weak self] value in
+                guard let self = self else { fatalError("missing self") }
+                DispatchQueue.main.async {
+                    print(value.debugDescription)
+                    self.configView.text = value.debugDescription
+                }
+
+            })
+        )
     }
 
     override func viewWillAppear(_ animated: Bool) {

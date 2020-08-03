@@ -8,6 +8,7 @@
 
 import Foundation
 
+// TODO: Maybe next enhancement is to have setting that persist across multiple test cases or test suites
 public struct ServiceSettings {
     public typealias DictionaryType = [String: ValueTypes]
 
@@ -25,6 +26,10 @@ public struct ServiceSettings {
             accumulator.merge(dictionaries: dict)
         }
         contents = accumulator
+    }
+
+    mutating func empty() {
+        contents.removeAll()
     }
 }
 

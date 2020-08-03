@@ -26,6 +26,7 @@ public enum LiveResetHostError: Error {
 
 // implement by class that replace the RootViewController and UIWindow, either AppDelegate, SceneDelegate
 public protocol LiveResetHostDelegate: AnyObject {
+    var window: UIWindow? { get set }
     func didReceiveReset()
 }
 
@@ -48,14 +49,10 @@ public class LiveResetHost {
 
     private var netServiceBroadcasted: Bool = false
 
-    private var settingsPromise: EventLoopPromise<ServiceSettings>
-    public var serviceSettings: EventLoopFuture<ServiceSettings> {
-        settingsPromise.futureResult
-    }
+    @Published public private(set) var currentSessionData: ServiceSettings = ServiceSettings()
 
     private init() {
         group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        settingsPromise = group.next().makePromise()
         if let bonjourName = ProcessInfo.processInfo.environment[SharedKey.NetServiceName] {
             netServiceName = bonjourName
         }
@@ -125,10 +122,11 @@ public class LiveResetHost {
 extension LiveResetHost: RequestHandlerForwarder {
     func didReceiveReset() {
         delegate?.didReceiveReset()
+        currentSessionData.empty()
     }
 
     func didReceiveSettings(_ setttings: ServiceSettings) {
-        settingsPromise.succeed(setttings)
+        currentSessionData = ServiceSettings(currentSessionData, setttings)
     }
 }
 

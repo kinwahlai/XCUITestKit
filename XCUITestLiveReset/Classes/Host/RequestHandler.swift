@@ -11,7 +11,7 @@ import NIO
 
 protocol RequestHandlerForwarder: AnyObject {
     func didReceiveReset()
-    func didReceiveSettings(_ setttings: ServiceSettings)
+    func didReceiveSettings(_ settings: ServiceSettings)
 }
 
 final class RequestHandler {

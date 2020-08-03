@@ -267,37 +267,37 @@
                                 <items/>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="remote config received:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPr-r9-6GI">
-                                <rect key="frame" x="16" y="20" width="223" height="27"/>
+                                <rect key="frame" x="20" y="20" width="335" height="27"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="scc-Mj-k9t">
-                                <rect key="frame" x="16" y="72" width="329" height="250"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzb-bA-FpR">
+                                <rect key="frame" x="20" y="67" width="335" height="200"/>
                                 <accessibility key="accessibilityConfiguration" identifier="configView"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="iq0-vG-E1N"/>
+                                    <constraint firstAttribute="height" constant="200" id="q7y-8d-Fpy"/>
                                 </constraints>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="aPr-r9-6GI" firstAttribute="leading" secondItem="NFN-b2-HQO" secondAttribute="leading" constant="16" id="Kkg-L2-Cfz"/>
-                            <constraint firstAttribute="trailing" secondItem="aPr-r9-6GI" secondAttribute="trailing" constant="136" id="NN8-ad-XEZ"/>
-                            <constraint firstItem="scc-Mj-k9t" firstAttribute="leading" secondItem="NFN-b2-HQO" secondAttribute="leading" constant="16" id="NRw-cr-pUS"/>
+                            <constraint firstItem="fzb-bA-FpR" firstAttribute="leading" secondItem="NFN-b2-HQO" secondAttribute="leading" constant="20" id="H0r-nA-1zh"/>
+                            <constraint firstItem="aPr-r9-6GI" firstAttribute="leading" secondItem="NFN-b2-HQO" secondAttribute="leading" constant="20" id="Kkg-L2-Cfz"/>
+                            <constraint firstAttribute="trailing" secondItem="fzb-bA-FpR" secondAttribute="trailing" constant="20" id="NGJ-G2-fYU"/>
+                            <constraint firstAttribute="trailing" secondItem="aPr-r9-6GI" secondAttribute="trailing" constant="20" id="NN8-ad-XEZ"/>
                             <constraint firstItem="mrd-wa-B2z" firstAttribute="top" secondItem="5un-ps-b3w" secondAttribute="bottom" id="OlL-Vq-enF"/>
+                            <constraint firstItem="fzb-bA-FpR" firstAttribute="top" secondItem="aPr-r9-6GI" secondAttribute="bottom" constant="20" id="Q7x-gG-t1N"/>
                             <constraint firstItem="aPr-r9-6GI" firstAttribute="top" secondItem="Du8-v5-JPo" secondAttribute="bottom" constant="20" id="atE-jP-Rz6"/>
-                            <constraint firstItem="scc-Mj-k9t" firstAttribute="top" secondItem="aPr-r9-6GI" secondAttribute="bottom" constant="25" id="f5R-It-rRL"/>
                             <constraint firstItem="5un-ps-b3w" firstAttribute="leading" secondItem="NFN-b2-HQO" secondAttribute="leading" id="tkE-KJ-Fuw"/>
-                            <constraint firstAttribute="trailing" secondItem="scc-Mj-k9t" secondAttribute="trailing" constant="30" id="vS7-hI-A1A"/>
                             <constraint firstAttribute="trailing" secondItem="5un-ps-b3w" secondAttribute="trailing" id="vej-fS-eto"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="configView" destination="scc-Mj-k9t" id="h2T-fM-5lz"/>
+                        <outlet property="configView" destination="fzb-bA-FpR" id="6xV-xT-wOY"/>
                         <outlet property="remoteConfigReceived" destination="aPr-r9-6GI" id="gp1-xO-pWm"/>
                     </connections>
                 </viewController>
