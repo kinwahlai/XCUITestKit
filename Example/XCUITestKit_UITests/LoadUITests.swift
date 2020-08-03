@@ -24,7 +24,7 @@ class LoadUITests: TestBaseWithLiveReset {
 
     func actualTestFunction() throws {
         let app = XCUIApplication()
-        XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
+        assertHeaderText()
 
         assertgRPCServerStarted()
 
@@ -33,7 +33,7 @@ class LoadUITests: TestBaseWithLiveReset {
 
         app.textFields["email_textfield"].tap()
         app.textFields["email_textfield"].typeText("valid@email.com")
-        let verifyEmailButton = app.buttons["verifyEmailButton"].staticTexts["verify email"]
+        let verifyEmailButton = app.buttons["verifyEmailButton"]
         verifyEmailButton.tap()
 
         XCTAssertFalse(app.staticTexts["emailFieldError"].exists)

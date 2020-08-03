@@ -14,15 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        if case .success(let port) = LiveResetHost.shared
-            .set(\.delegate, self)
-            .startIfAvailable() {
-            print("Live reset host started on port \(port)")
-            reset()
-        } else {
-            return false
+        if LiveResetHost.isAvailable {
+            if case .failure(let error) = LiveResetHost.shared.set(\.delegate, self).starts() {
+                print("Live reset host failed to start - \(error.localizedDescription)")
+                return false
+            }
         }
-
+        reset()
         return true
     }
 

@@ -50,12 +50,11 @@ class OtherUIControlsUITests: TestBaseWithLiveReset {
 
         app.buttons["showAlert_button"].tap()
 
-        let elementsQuery = app.alerts["Alert"].scrollViews.otherElements
-        XCTAssertTrue(elementsQuery.staticTexts["Alert"].isHittable)
+        XCTAssertTrue(app.alerts.staticTexts["Alert"].isHittable)
 
         XCTAssertEqual(app.alerts.staticTexts["Alert"].label, "Alert")
         XCTAssertEqual(app.alerts.staticTexts["show this for testing"].label, "show this for testing")
 
-        elementsQuery.buttons["Dismiss"].tap()
+        app.alerts.buttons["Dismiss"].tap()
     }
 }

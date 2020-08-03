@@ -12,15 +12,12 @@ import NIO
 
 public enum LiveResetHostError: Error {
     case serverFailedToStart
-    case liveResetModuleNotAvailble
     case failedToResolvePort
 
     public var localizedDescription: String {
         switch self {
-            case .liveResetModuleNotAvailble:
-                return "LiveResetHostDelegate must be set before calling start(), please configure with +[LiveResetHost set]"
             case .serverFailedToStart:
-                return "gRPC server failed to start"
+                return "gRPC server failed to start. Maybe LiveResetHostDelegate is not set, please configure with +[LiveResetHost set]"
             case .failedToResolvePort:
                 return "Failed to resolve port with the NetServiceName, please verify the NetServiceName"
         }
@@ -80,10 +77,7 @@ public class LiveResetHost {
     }
 
     @discardableResult
-    public func startIfAvailable() -> Result<Int, LiveResetHostError> {
-        guard LiveResetHost.isAvailable else {
-            return .failure(.liveResetModuleNotAvailble)
-        }
+    public func starts() -> Result<Int, LiveResetHostError> {
         guard netServiceBroadcasted == false, port == 0 else {
             return .success(port)
         }
@@ -108,8 +102,6 @@ public class LiveResetHost {
                     self.acceptRequest()
                 case .failure(let err):
                     print("Failed to resolve NetService \(err.localizedDescription)")
-                // FIXME: how to handle this?
-                // Shutdown?
             }
         }
     }

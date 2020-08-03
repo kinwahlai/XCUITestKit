@@ -29,7 +29,7 @@ test_case: -[RemoteConfigUITests testShowSettingsSentInSetup]
 ===================
 """
         let app = XCUIApplication()
-        XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
+        assertHeaderText()
         app.tables.staticTexts["btn_testUIControls"].tap()
         app.navigationBars["UI Controls"].buttons["More"].tap()
 
@@ -50,7 +50,7 @@ test_case: -[RemoteConfigUITests testShowSettingsSentInSetup]
 //===================
 //"""
 //        let app = XCUIApplication()
-//        XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
+//        assertHeaderText()
 //        app.tables.staticTexts["btn_testUIControls"].tap()
 //        app.navigationBars["UI Controls"].buttons["More"].tap()
 //

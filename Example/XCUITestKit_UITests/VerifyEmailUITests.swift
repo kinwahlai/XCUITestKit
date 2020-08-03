@@ -9,6 +9,14 @@
 import XCTest
 import XCUITestLiveReset
 
+func assertHeaderText() {
+    if #available(iOS 13.0, *) {
+        XCTAssertTrue(XCUIApplication().staticTexts["XCUITestKit Example"].exists)
+    } else {
+        XCTAssertTrue(XCUIApplication().otherElements["XCUITestKit Example"].exists)
+    }
+}
+
 class VerifyEmailUITests: TestBaseWithLiveReset {
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -17,19 +25,18 @@ class VerifyEmailUITests: TestBaseWithLiveReset {
     override func tearDownWithError() throws {}
 
     func testYouAreAppEntryScreen() throws {
-        let app = XCUIApplication()
-        XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
+        assertHeaderText()
     }
 
     func testEmailYouEnteredIsValid() throws {
         let app = XCUIApplication()
-        XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
+        assertHeaderText()
         app.tables.staticTexts["btn_testUIControls"].tap()
         XCTAssertEqual(app.staticTexts["headline_label"].title, "")
 
         app.textFields["email_textfield"].tap()
         app.textFields["email_textfield"].typeText("valid@email.com")
-        let verifyEmailButton = app.buttons["verifyEmailButton"].staticTexts["verify email"]
+        let verifyEmailButton = app.buttons["verifyEmailButton"]
         verifyEmailButton.tap()
 
         XCTAssertFalse(app.staticTexts["emailFieldError"].exists)
@@ -37,13 +44,13 @@ class VerifyEmailUITests: TestBaseWithLiveReset {
 
     func testErrorMessageShownOnInvalidEmail() throws {
         let app = XCUIApplication()
-        XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
+        assertHeaderText()
         app.tables.staticTexts["btn_testUIControls"].tap()
         XCTAssertEqual(app.staticTexts["headline_label"].title, "")
 
         app.textFields["email_textfield"].tap()
         app.textFields["email_textfield"].typeText("invalid-email.com")
-        let verifyEmailButton = app.buttons["verifyEmailButton"].staticTexts["verify email"]
+        let verifyEmailButton = app.buttons["verifyEmailButton"]
         verifyEmailButton.tap()
 
         XCTAssertTrue(app.staticTexts["emailFieldError"].exists)
@@ -52,13 +59,13 @@ class VerifyEmailUITests: TestBaseWithLiveReset {
 
     func testErrorMessageHiddenOnReplacedWithValidEmail() throws {
         let app = XCUIApplication()
-        XCTAssertTrue(app.navigationBars["XCUITestKit Example"].staticTexts["XCUITestKit Example"].exists)
+        assertHeaderText()
         app.tables.staticTexts["btn_testUIControls"].tap()
         XCTAssertEqual(app.staticTexts["headline_label"].title, "")
 
         app.textFields["email_textfield"].tap()
         app.textFields["email_textfield"].typeText("invalid-email.com")
-        let verifyEmailButton = app.buttons["verifyEmailButton"].staticTexts["verify email"]
+        let verifyEmailButton = app.buttons["verifyEmailButton"]
         verifyEmailButton.tap()
 
         XCTAssertTrue(app.staticTexts["emailFieldError"].exists)
