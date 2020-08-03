@@ -14,7 +14,7 @@ protocol RequestHandlerForwarder: AnyObject {
     func didReceiveSettings(_ setttings: ServiceSettings)
 }
 
-class RequestHandler {
+final class RequestHandler {
     weak var delegate: RequestHandlerForwarder?
 
     init(delegate: RequestHandlerForwarder) {

@@ -15,8 +15,16 @@ public struct ServiceSettings {
 
     init() {}
 
-    init(contents: DictionaryType) {
+    public init(contents: DictionaryType) {
         self.contents = contents
+    }
+
+    public init(_ settings: ServiceSettings...) {
+        var accumulator = DictionaryType()
+        settings.map { $0.contents }.forEach { dict in
+            accumulator.merge(dictionaries: dict)
+        }
+        contents = accumulator
     }
 }
 

@@ -16,6 +16,23 @@ public enum ValueTypes {
     case intValue(Int)
 }
 
+extension ValueTypes: Equatable {
+    public static func ==(lhs: ValueTypes, rhs: ValueTypes) -> Bool {
+        switch (lhs, rhs) {
+            case (let .stringValue(lhsString), let .stringValue(rhsString)):
+                return lhsString == rhsString
+            case (let .boolValue(lhsBool), let .boolValue(rhsBool)):
+                return lhsBool == rhsBool
+            case (let .doubleValue(lhsDouble), let .doubleValue(rhsDouble)):
+                return lhsDouble == rhsDouble
+            case (let .intValue(lhsInt), let .intValue(rhsInt)):
+                return lhsInt == rhsInt
+            default:
+                return false
+        }
+    }
+}
+
 extension ValueTypes {
     init?(_ input: XCUITestKit_OneOf) {
         guard let valueTypes = input.types else { return nil }
