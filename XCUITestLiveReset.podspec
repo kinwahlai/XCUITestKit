@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/darrenkwlai'
   s.swift_versions = '5.0'
   s.platform = :ios
-  s.ios.deployment_target = '12.0'
+  s.ios.deployment_target = '12.4'
   s.cocoapods_version = '>= 1.4.0'
   s.static_framework = true
   s.default_subspec = 'Base'
@@ -40,7 +40,7 @@ Pod::Spec.new do |s|
   s.dependency 'XCUITestKit', '~> 0.1.0'
   s.subspec 'Client' do |c|
     c.frameworks = 'XCTest'
-    c.pod_target_xcconfig = { :prebuild_configuration => 'debug', 'ENABLE_BITCODE' => 'NO' }
+    c.pod_target_xcconfig = { :prebuild_configuration => 'debug', 'ENABLE_BITCODE' => 'NO', 'OTHER_LDFLAGS' => '-weak_framework XCTEST -weak-lXCTestSwiftSupport'  }
     c.dependency 'XCUITestLiveReset/Base'
     c.source_files = "XCUITestLiveReset/Classes/Client/**/*.{swift, m, h}"
   end

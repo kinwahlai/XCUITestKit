@@ -1,4 +1,4 @@
-platform :ios, '13.0'
+platform :ios, '12.4'
 use_frameworks!
 inhibit_all_warnings!
 
@@ -22,4 +22,16 @@ target 'XCUITestKit_UITests' do
     pod 'XCUITestLiveReset/Client', '~> 0.1.0'
   end
   
+end
+
+post_install do |installer|
+  installer.generated_projects.each do | project |
+    project.targets.each do | target |
+      if target.name == 'CNIOBoringSSL' || target.name == 'CNIOBoringSSLShims'
+        target.build_configurations.each do | config |
+          config.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] ||= ['$(inherited)']
+        end
+      end
+    end
+  end
 end
