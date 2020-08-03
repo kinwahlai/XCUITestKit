@@ -21,7 +21,7 @@ public struct LiveResetClientBuilder {
     let config: LiveResetClientConfiguration
 
     public func build() -> LiveResetClient {
-        var instance = LiveResetClient()
+        let instance = LiveResetClient()
         instance.configureInstance(withConfiguration: config)
         return instance
     }

@@ -16,7 +16,7 @@ class gRPCHost {
     private(set) var isServerStarted: Bool = false
 
     init(port: Int, callHandler: CallHandlerProvider, group: EventLoopGroup) {
-        _server.set { [unowned self] () -> EventLoopFuture<Server> in
+        _server.set { () -> EventLoopFuture<Server> in
             Server.insecure(group: group).withServiceProviders([callHandler])
                 .bind(host: "localhost", port: port)
         }
